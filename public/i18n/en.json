@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "home": "Home",
+    "profile": "Profile",
+    "medicaments": "Medicaments",
+    "temperature": "Temperature Management",
+    "configuration": "Configuration",
+    "logout": "Logout"
+  },
+  "common": {
+    "welcome": "Welcome",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit"
+  }
+}
