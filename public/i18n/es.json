@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "profile": "Perfil",
+    "medicaments": "Medicamentos",
+    "temperature": "Gestión de Temperatura",
+    "configuration": "Configuración",
+    "logout": "Cerrar Sesión"
+  },
+  "common": {
+    "welcome": "Bienvenido",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar"
+  }
+}

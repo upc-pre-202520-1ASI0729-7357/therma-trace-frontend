@@ -1,0 +1,50 @@
+<header class="top-bar">
+  <div class="top-bar-left">
+    @if (isMobile()) {
+      <button mat-icon-button (click)="menuToggle.emit()" class="menu-button">
+        <mat-icon>menu</mat-icon>
+      </button>
+    }
+
+    <div class="logo-container">
+      <div class="logo">
+        <mat-icon class="logo-icon">thermostat</mat-icon>
+      </div>
+      <h1 class="app-title">ThermaTrace</h1>
+    </div>
+  </div>
+
+  <div class="top-bar-center">
+    <span class="welcome-text">Welcome, {{ userName() }}</span>
+  </div>
+
+  <div class="top-bar-right">
+    @if (!isMobile()) {
+      <button mat-icon-button class="icon-button" [matBadge]="mailCount()" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="above after" [attr.aria-label]="mailCount() + ' unread messages'">
+        <mat-icon>mail</mat-icon>
+      </button>
+
+      <button mat-icon-button class="icon-button" [matBadge]="notificationCount()" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="above after" [attr.aria-label]="notificationCount() + ' notifications'">
+        <mat-icon>notifications</mat-icon>
+      </button>
+
+      <div class="user-info">
+        <img [src]="userAvatar()" [alt]="userName()" class="user-avatar" />
+        <div class="user-details">
+          <span class="user-name">{{ userName() }}</span>
+          <span class="user-role">{{ userRole() }}</span>
+        </div>
+      </div>
+
+      <app-language-switcher />
+    } @else {
+      <button mat-icon-button class="icon-button" [matBadge]="mailCount()" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="above after" [attr.aria-label]="mailCount() + ' unread messages'">
+        <mat-icon>mail</mat-icon>
+      </button>
+
+      <button mat-icon-button class="icon-button" [matBadge]="notificationCount()" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="above after" [attr.aria-label]="notificationCount() + ' notifications'">
+        <mat-icon>notifications</mat-icon>
+      </button>
+    }
+  </div>
+</header>
