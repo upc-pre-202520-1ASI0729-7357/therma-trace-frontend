@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainLayout } from './shared/presentation/components/main-layout/main-layout';
 import { Home } from './shared/presentation/views/home/home';
+import { Profile } from './user/presentation/views/profile/profile';
 import { PageNotFound } from './shared/presentation/views/page-not-found/page-not-found';
 
 export const routes: Routes = [
@@ -10,6 +11,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: Home },
+      { path: 'profile', component: Profile },
       { path: '**', component: PageNotFound }
     ]
   }
