@@ -1,0 +1,48 @@
+<div class="medicament-control">
+  <!-- Toolbar -->
+  <app-medicament-toolbar
+    (searchChange)="onSearchChange($event)"
+    (addClick)="openCreateForm()">
+  </app-medicament-toolbar>
+
+  <!-- Loading State -->
+  <app-loading-state *ngIf="medicamentStore.loading()"></app-loading-state>
+
+  <!-- Error State -->
+  <app-error-state
+    *ngIf="medicamentStore.error()"
+    [errorMessage]="medicamentStore.error()">
+  </app-error-state>
+
+  <!-- Medicaments Grid -->
+  <app-medicament-grid
+    *ngIf="!medicamentStore.loading() && medicamentStore.filteredMedicaments().length > 0"
+    [medicaments]="medicamentStore.filteredMedicaments()"
+    [isExpiredFn]="isExpired.bind(this)"
+    (edit)="openEditForm($event)"
+    (delete)="deleteMedicament($event)">
+  </app-medicament-grid>
+
+  <!-- Empty State -->
+  <app-empty-state
+    *ngIf="!medicamentStore.loading() && medicamentStore.filteredMedicaments().length === 0"
+    icon="inventory_2"
+    title="medicaments.noMedicaments"
+    description="medicaments.noMedicamentsDescription"
+    [showButton]="true"
+    buttonText="medicaments.addFirstMedicament"
+    buttonIcon="add"
+    (buttonClick)="openCreateForm()">
+  </app-empty-state>
+
+  <!-- Medicament Form Modal -->
+  <app-medicament-form
+    *ngIf="showForm"
+    [isEditing]="!!editingMedicament"
+    [medicament]="editingMedicament"
+    [loading]="medicamentStore.loading()"
+    (close)="closeForm()"
+    (submit)="onSubmit($event)"
+    (imageValidationError)="onImageValidationError($event)">
+  </app-medicament-form>
+</div>

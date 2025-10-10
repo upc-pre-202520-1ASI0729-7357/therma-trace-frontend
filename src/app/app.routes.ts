@@ -3,6 +3,8 @@ import { MainLayout } from './shared/presentation/components/main-layout/main-la
 import { Home } from './shared/presentation/views/home/home';
 import { Profile } from './user/presentation/views/profile/profile';
 import { PageNotFound } from './shared/presentation/views/page-not-found/page-not-found';
+import { TemperatureManagement } from './temperature/presentation/view/medicine-management';
+import { MedicamentControl } from './medicaments/presentation/views/medicament-control';
 
 export const routes: Routes = [
   {
@@ -11,6 +13,8 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: Home },
+      { path: 'medicaments', component: MedicamentControl },
+      { path: 'temperature', component: TemperatureManagement },
       { path: 'profile', component: Profile },
       { path: '**', component: PageNotFound }
     ]
