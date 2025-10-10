@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { DashboardData, DashboardStats, MedicinesByCategory, ExpiredMedicinesData, NotificationItem } from '../domain/model/dashboard.entity';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardApiService {
-  private readonly API_URL = 'http://localhost:3000/medicines';
+  private readonly API_URL = `${environment.apiUrl}/medicines`;
 
   async getDashboardData(): Promise<DashboardData> {
     try {

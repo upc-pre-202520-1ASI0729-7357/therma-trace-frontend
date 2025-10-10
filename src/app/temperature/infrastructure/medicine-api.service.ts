@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { TemperatureMedicine, CreateTemperatureMedicineRequest, UpdateTemperatureMedicineRequest } from '../domain/model/medicine.entity';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TemperatureMedicineApiService {
-  private readonly API_URL = 'http://localhost:3000/medicines';
+  private readonly API_URL = `${environment.apiUrl}/medicines`;
 
   async getTemperatureMedicines(): Promise<TemperatureMedicine[]> {
     const response = await fetch(this.API_URL);
