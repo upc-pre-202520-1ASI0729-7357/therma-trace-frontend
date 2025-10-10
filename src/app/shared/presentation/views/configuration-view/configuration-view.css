@@ -1,0 +1,215 @@
+.configuration-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: transparent;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-bottom: 48px;
+  color: #2c3e50;
+  text-align: left;
+  letter-spacing: -0.5px;
+}
+
+/* Layout para las dos secciones superiores */
+.sections-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  gap: 30px;
+}
+
+.half-width {
+  flex: 1;
+  min-width: 0;
+}
+
+.section-gap {
+  display: none;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Estilos para las secciones - Sin fondo blanco */
+.config-section {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.section-icon {
+  color: #6c757d;
+  margin-right: 12px;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+}
+
+/* Lista de items */
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.config-item {
+  padding: 0;
+}
+
+.item-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Cambiado a flex-start para mejor alineación */
+  width: 100%;
+  min-height: 40px; /* Altura mínima consistente */
+}
+
+/* Jerarquía de títulos - Mejor alineación */
+.item-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+  padding-top: 2px; /* Ajuste fino de alineación */
+}
+
+.item-subtitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #495057;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+  padding-top: 2px;
+}
+
+.item-small-title {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6c757d;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+  padding-top: 2px;
+}
+
+/* Contenedor para acciones - Mejor alineación vertical */
+.item-content > .settings-button,
+.item-content > .arrow-button {
+  margin-left: 16px;
+  flex-shrink: 0;
+  margin-top: -4px; /* Ajuste para alinear verticalmente con el texto */
+}
+
+/* Estilos para los botones de engranaje */
+.settings-button {
+  color: #6c757d !important;
+  transition: all 0.3s ease;
+  background-color: transparent !important;
+}
+
+.settings-button:hover {
+  color: #495057 !important;
+  background-color: #f8f9fa !important;
+  transform: rotate(90deg);
+}
+
+/* Estilos para los botones de flecha */
+.arrow-button {
+  color: #6c757d !important;
+  transition: all 0.3s ease;
+  background-color: transparent !important;
+}
+
+.arrow-button:hover {
+  color: #495057 !important;
+  background-color: #f8f9fa !important;
+}
+
+/* Estilo específico para la sección de Support */
+.support-section {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 32px;
+  margin-top: 32px;
+}
+
+/* Líneas divisorias entre secciones */
+.config-section:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .configuration-container {
+    padding: 24px 16px;
+  }
+
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: 32px;
+  }
+
+  .sections-row {
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  .section-header {
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .items-list {
+    gap: 14px;
+  }
+
+  .item-text {
+    font-size: 0.9rem;
+  }
+
+  .item-content {
+    min-height: 36px;
+  }
+
+  .item-content > .mat-slide-toggle,
+  .item-content > .settings-button,
+  .item-content > .arrow-button {
+    margin-top: -2px;
+  }
+}
+
+/* Para pantallas grandes */
+@media (min-width: 1200px) {
+  .configuration-container {
+    max-width: 1200px;
+    padding: 60px 40px;
+  }
+}

@@ -1,0 +1,124 @@
+<div class="configuration-container">
+  <h1 class="page-title">{{ 'configuration.title'|translate }}</h1>
+
+  <div class="sections-row">
+    <!-- Notifications Section -->
+    <div class="config-section half-width">
+      <div class="section-header">
+        <mat-icon class="section-icon">notifications</mat-icon>
+        <h2 class="section-title">{{ 'configuration.notifications.title'|translate }}</h2>
+      </div>
+
+      <div class="items-list">
+        <div class="config-item">
+          <div class="item-content">
+            <h3 class="item-title">{{ 'configuration.notifications.expiration'|translate }}</h3>
+            <mat-slide-toggle checked></mat-slide-toggle>
+          </div>
+        </div>
+
+        <div class="config-item">
+          <div class="item-content">
+            <h3 class="item-title">{{ 'configuration.notifications.system'|translate }}</h3>
+            <mat-slide-toggle checked></mat-slide-toggle>
+          </div>
+        </div>
+
+        <div class="config-item">
+          <div class="item-content">
+            <h3 class="item-title">{{ 'configuration.notifications.customer'|translate }}</h3>
+            <mat-slide-toggle checked></mat-slide-toggle>
+          </div>
+        </div>
+
+        <div class="config-item">
+          <div class="item-content">
+            <h3 class="item-title">{{ 'configuration.notifications.push'|translate }}</h3>
+            <mat-slide-toggle checked></mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Espacio entre secciones -->
+    <div class="section-gap"></div>
+
+    <!-- Security Section -->
+    <div class="config-section half-width">
+      <div class="section-header">
+        <mat-icon class="section-icon">security</mat-icon>
+        <h2 class="section-title">{{ 'configuration.security.title'|translate }}</h2>
+      </div>
+
+      <div class="items-list">
+        <div class="config-item">
+          <div class="item-content">
+            <h3 class="item-title">{{ 'configuration.security.password'|translate }}</h3>
+            <button mat-icon-button class="settings-button">
+              <mat-icon>settings</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="config-item">
+          <div class="item-content">
+            <h3 class="item-title">{{ 'configuration.security.2fa'|translate }}</h3>
+            <button mat-icon-button class="settings-button">
+              <mat-icon>settings</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="config-item">
+          <div class="item-content">
+            <h3 class="item-title">{{ 'configuration.security.sessions'|translate }}</h3>
+            <button mat-icon-button class="settings-button">
+              <mat-icon>settings</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="config-item">
+          <div class="item-content">
+            <h3 class="item-title">{{ 'configuration.security.alternate'|translate }}</h3>
+            <button mat-icon-button class="settings-button">
+              <mat-icon>settings</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Support Section -->
+  <div class="config-section full-width support-section">
+    <div class="section-header">
+      <mat-icon class="section-icon">help_center</mat-icon>
+      <h2 class="section-title">{{ 'configuration.support.title'|translate }}</h2>
+    </div>
+
+    <div class="items-list">
+      <div class="config-item">
+        <div class="item-content">
+          <h3 class="item-title">{{ 'configuration.support.features'|translate }}</h3>
+          <a href="https://upc-pre-202520-1asi0729-7357.github.io/LANDING-PAGE-/#features" target="_blank" rel="noopener noreferrer">
+            <button mat-icon-button class="arrow-button">
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <div class="config-item">
+        <div class="item-content">
+          <h3 class="item-title">{{ 'configuration.support.about'|translate }}</h3>
+          <a href="https://upc-pre-202520-1asi0729-7357.github.io/LANDING-PAGE-/#about" target="_blank" rel="noopener noreferrer">
+            <button mat-icon-button class="arrow-button">
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
