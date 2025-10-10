@@ -1,0 +1,103 @@
+{
+  "profile": {
+    "name": "Dra. Mariela Quispe",
+    "specialty": "Especialista en cadena de frío",
+    "location": "Hospital Central, Lima",
+    "photo": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+  },
+  "timezones": [
+    {
+      "id": 1,
+      "zone": "Lima",
+      "temperature": "22°",
+      "humidity": "70%",
+      "status": "Normal"
+    },
+    {
+      "id": 2,
+      "zone": "Cusco",
+      "temperature": "12°",
+      "humidity": "40%",
+      "status": "Alerta"
+    },
+    {
+      "id": 3,
+      "zone": "Arequipa",
+      "temperature": "18°",
+      "humidity": "50%",
+      "status": "Normal"
+    }
+  ],
+  "alerts": [
+    {
+      "id": 1,
+      "zone": "Cusco",
+      "message": "Temperatura fuera de rango",
+      "date": "2025-10-09 09:30"
+    },
+    {
+      "id": 2,
+      "zone": "Arequipa",
+      "message": "Sensor desconectado",
+      "date": "2025-10-09 10:15"
+    }
+  ],
+  "medicines": [
+    {
+      "id": 1,
+      "name": "Penicilina",
+      "temperature": "2°",
+      "expirationDate": "2025-11-30",
+      "image": "https://richmondvet.com.ar/wp-content/uploads/2020/03/Render-Pencilline-100mL-V1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Insulina",
+      "temperature": "2°",
+      "expirationDate": "2026-01-15",
+      "image": "https://farmacorp.com/cdn/shop/files/109243_0e235075-1d31-454a-aa14-bf48a2d6b714_1200x1200.jpg?v=1732893681"
+    },
+    {
+      "id": 3,
+      "name": "Insulina Dispro",
+      "temperature": "2°",
+      "expirationDate": "2026-03-10",
+      "image": "https://farmaciauniversalpe.vtexassets.com/arquivos/ids/156465/12142_1.jpg?v=638417261799200000"
+    },
+    {
+      "id": 4,
+      "name": "Insulina Lispro",
+      "temperature": "2°",
+      "expirationDate": "2026-05-25",
+      "image": "https://farmaciauniversalpe.vtexassets.com/arquivos/ids/156465/12142_1.jpg?v=638417261799200000"
+    },
+    {
+      "id": 5,
+      "name": "Insulina Glargina",
+      "temperature": "2°",
+      "expirationDate": "2026-07-31",
+      "image": "https://i5.walmartimages.com.mx/gr/images/product-images/img_large/00750134902515L.jpg?odnHeight=612&odnWidth=612&odnBg=FFFFFF"
+    },
+    {
+      "id": 6,
+      "name": "Ceftriaxona",
+      "temperature": "2°",
+      "expirationDate": "2026-11-05",
+      "image": "https://difem.cl/wp-content/uploads/2025/02/2800004_Ceftriaxona-1-g_600x600px.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Vancomicina",
+      "temperature": "2°",
+      "expirationDate": "2027-02-28",
+      "image": "https://farmaciauniversalpe.vtexassets.com/arquivos/ids/161807-800-auto?v=638745613536100000&width=800&height=auto&aspect=true"
+    },
+    {
+      "id": 8,
+      "name": "Cefalexina",
+      "temperature": "2°",
+      "expirationDate": "2027-04-15",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoIkMxaASzqhs3wAbPFZOLq8PeYcfd34iW0A&s"
+    }
+  ]
+}
