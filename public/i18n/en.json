@@ -149,28 +149,36 @@
         "confirm": "Yes, Delete"
       }
 
-    },
-    "configuration": {
-      "title": "Configuration",
-      "notifications": {
-        "title": "Notifications",
-        "expiration": "Expiration Alerts",
-        "system": "System Updates",
-        "customer": "Customer Notifications",
-        "push": "Push Notifications"
-      },
-      "security": {
-        "title": "Security and Privacy",
-        "password": "Change Password",
-        "2fa": "Two-Factor Authentication",
-        "sessions": "Session Management",
-        "alternate": "Add Alternate mail address"
-      },
-      "support": {
-        "title": "Support and Help",
-        "features": "Features",
-        "about": "About Us"
-      }
     }
+  },
+  "configuration": {
+    "title": "Configuration",
+    "notifications": {
+      "title": "Notifications",
+      "expiration": "Expiration Alerts",
+      "system": "System Updates",
+      "customer": "Customer Notifications",
+      "push": "Push Notifications"
+    },
+    "security": {
+      "title": "Security and Privacy",
+      "password": "Change Password",
+      "2fa": "Two-Factor Authentication",
+      "sessions": "Session Management",
+      "alternate": "Add Alternate mail address"
+    },
+    "support": {
+      "title": "Support and Help",
+      "features": "Features",
+      "about": "About Us"
+    }
+  },
+  "home": {
+    "projectOverview": "Project Overview",
+    "medicinesExpired": "Medicines Expired",
+    "notificationFeed": "Notification Feed",
+    "noNotifications": "No notifications at this time",
+    "expiration": "Expiration",
+    "expired": "Expired"
   }
 }

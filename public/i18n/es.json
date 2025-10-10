@@ -148,28 +148,36 @@
         "message": "¿Estás seguro de que quieres eliminar este método de pago? Esta acción no se puede deshacer.",
         "confirm": "Sí, Eliminar"
       }
-    },
-    "configuration": {
-      "title": "Configuración",
-      "notifications": {
-        "title": "Notificaciones",
-        "expiration": "Alertas de Vencimiento",
-        "system": "Actualizaciones del Sistema",
-        "customer": "Notificaciones del Cliente",
-        "push": "Push Notifications"
-      },
-      "security": {
-        "title": "Seguridad y Privacidad",
-        "password": "Cambiar Contraseña",
-        "2fa": "Autenticación en dos pasos",
-        "sessions": "Gestión de Sesiones",
-        "alternate": "Agregar dirección de correo alternativa"
-      },
-      "support": {
-        "title": "Soporte y Ayuda",
-        "features": "Características",
-        "about": "Sobre Nosotros"
-      }
     }
+  },
+  "configuration": {
+    "title": "Configuración",
+    "notifications": {
+      "title": "Notificaciones",
+      "expiration": "Alertas de Vencimiento",
+      "system": "Actualizaciones del Sistema",
+      "customer": "Notificaciones del Cliente",
+      "push": "Push Notifications"
+    },
+    "security": {
+      "title": "Seguridad y Privacidad",
+      "password": "Cambiar Contraseña",
+      "2fa": "Autenticación en dos pasos",
+      "sessions": "Gestión de Sesiones",
+      "alternate": "Agregar dirección de correo alternativa"
+    },
+    "support": {
+      "title": "Soporte y Ayuda",
+      "features": "Características",
+      "about": "Sobre Nosotros"
+    }
+  },
+  "home": {
+    "projectOverview": "Resumen del Proyecto",
+    "medicinesExpired": "Medicinas Vencidas",
+    "notificationFeed": "Feed de Notificaciones",
+    "noNotifications": "No hay notificaciones en este momento",
+    "expiration": "Vencimiento",
+    "expired": "Vencido"
   }
 }
