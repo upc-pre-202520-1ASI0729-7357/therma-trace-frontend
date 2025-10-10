@@ -1,0 +1,56 @@
+.confirmation-modal {
+  min-width: 400px;
+  max-width: 500px;
+}
+
+.modal-content {
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+.icon-container {
+  margin-bottom: 1.5rem;
+}
+
+.modal-icon {
+  font-size: 4rem;
+  width: 64px;
+  height: 64px;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: #1a1a1a;
+}
+
+.modal-message {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #666;
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+@media (max-width: 768px) {
+  .confirmation-modal {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+}

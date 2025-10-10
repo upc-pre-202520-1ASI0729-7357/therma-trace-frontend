@@ -1,31 +1,130 @@
 {
   "profile": {
-    "name": "Dra. Mariela Quispe",
-    "specialty": "Especialista en cadena de frío",
-    "location": "Hospital Central, Lima",
-    "photo": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+    "id": 1,
+    "fullName": "Juan Roberto, Carita Cruz",
+    "email": "bryancarita@gmail.com",
+    "phone": "+51 933 702 728",
+    "avatar": "/assets/images/img.png",
+    "role": "Nurse",
+    "timezoneId": "america_los_angeles",
+    "planId": "premium",
+    "languageId": "es",
+    "paymentMethodId": 1
   },
   "timezones": [
     {
+      "id": "utc_minus_5",
+      "name": "UTC -5 (Eastern Time)",
+      "offset": "-05:00"
+    },
+    {
+      "id": "america_lima",
+      "name": "UTC - 5 Lima",
+      "offset": "-05:00"
+    },
+    {
+      "id": "america_new_york",
+      "name": "UTC - 5 New York",
+      "offset": "-05:00"
+    },
+    {
+      "id": "america_chicago",
+      "name": "UTC - 6 Chicago",
+      "offset": "-06:00"
+    },
+    {
+      "id": "america_los_angeles",
+      "name": "UTC - 8 Los Angeles",
+      "offset": "-08:00"
+    },
+    {
+      "id": "europe_london",
+      "name": "UTC + 0 London",
+      "offset": "+00:00"
+    },
+    {
+      "id": "europe_paris",
+      "name": "UTC + 1 Paris",
+      "offset": "+01:00"
+    },
+    {
+      "id": "europe_athens",
+      "name": "UTC + 2 Athens",
+      "offset": "+02:00"
+    },
+    {
+      "id": "asia_dubai",
+      "name": "UTC + 4 Dubai",
+      "offset": "+04:00"
+    },
+    {
+      "id": "asia_tokyo",
+      "name": "UTC +9 Tokyo",
+      "offset": "+09:00"
+    },
+    {
+      "id": "australia_sydney",
+      "name": "UTC +10 Sydney",
+      "offset": "+10:00"
+    }
+  ],
+  "plans": [
+    {
+      "id": "freemium",
+      "name": "Freemium",
+      "price": 0,
+      "features": [
+        "Basic temperature monitoring",
+        "Up to 5 medications",
+        "Email notifications"
+      ]
+    },
+    {
+      "id": "premium",
+      "name": "Premium",
+      "price": 60,
+      "features": [
+        "Advanced temperature monitoring",
+        "Unlimited medications",
+        "SMS + Email notifications",
+        "Temperature alerts",
+        "Export reports"
+      ]
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise",
+      "price": 99.99,
+      "features": [
+        "All Premium features",
+        "Multi-location support",
+        "API access",
+        "Dedicated support",
+        "Custom integrations",
+        "Advanced analytics"
+      ]
+    }
+  ],
+  "paymentMethods": [
+    {
       "id": 1,
-      "zone": "Lima",
-      "temperature": "22°",
-      "humidity": "70%",
-      "status": "Normal"
+      "cardType": "Mastercard",
+      "lastFourDigits": "1323",
+      "expiryMonth": "12",
+      "expiryYear": "2024",
+      "cardholderName": "Test"
+    }
+  ],
+  "languages": [
+    {
+      "id": "en",
+      "name": "English",
+      "code": "en"
     },
     {
-      "id": 2,
-      "zone": "Cusco",
-      "temperature": "12°",
-      "humidity": "40%",
-      "status": "Alerta"
-    },
-    {
-      "id": 3,
-      "zone": "Arequipa",
-      "temperature": "18°",
-      "humidity": "50%",
-      "status": "Normal"
+      "id": "es",
+      "name": "Español",
+      "code": "es"
     }
   ],
   "alerts": [

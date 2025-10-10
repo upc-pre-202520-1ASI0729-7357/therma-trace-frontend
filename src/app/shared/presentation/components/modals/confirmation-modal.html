@@ -1,0 +1,22 @@
+<div class="confirmation-modal">
+  <div mat-dialog-content class="modal-content">
+    <div class="icon-container">
+      <mat-icon [style.color]="iconColor" class="modal-icon">{{ iconName }}</mat-icon>
+    </div>
+    <h2 class="modal-title">{{ data.title }}</h2>
+    <p class="modal-message">{{ data.message }}</p>
+  </div>
+
+  <div mat-dialog-actions class="modal-actions">
+    <button mat-button (click)="cancel()">
+      {{ data.cancelText }}
+    </button>
+    <button
+      mat-raised-button
+      [color]="data.type === 'danger' ? 'warn' : 'primary'"
+      (click)="confirm()"
+    >
+      {{ data.confirmText }}
+    </button>
+  </div>
+</div>
