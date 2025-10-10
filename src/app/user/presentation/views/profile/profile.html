@@ -1,0 +1,157 @@
+<!-- Loading Status -->
+@if (store.isLoading()) {
+  <div class="loading-container">
+    <p>{{ 'common.loading' | translate }}</p>
+  </div>
+}
+
+<!-- Error State -->
+@if (store.error() && !store.isLoading()) {
+  <div class="error-container">
+    <p class="error-message">{{ store.error() }}</p>
+  </div>
+}
+
+<!-- Profile View -->
+@if (!store.isLoading() && store.hasUser()) {
+  <div class="profile-container">
+    <h1 class="profile-title">{{ 'profile.title' | translate }}</h1>
+
+    <!-- Profile User Info -->
+    <div class="profile-header-card">
+      <div class="profile-header-content">
+        <img [src]="store.userAvatar()" [alt]="store.userFullName()" class="profile-avatar" />
+        <div class="profile-header-info">
+          <h2 class="profile-name">{{ store.userFullName() }}</h2>
+          <p class="profile-role">{{ store.userRole() }}</p>
+        </div>
+      </div>
+      <button
+        class="edit-profile-btn"
+        (click)="toggleEditMode()"
+      >
+        {{ isEditMode() ? ('profile.cancel' | translate) : ('profile.editProfile' | translate) }}
+      </button>
+    </div>
+
+    <!-- Profile Form Card -->
+    <div class="profile-form-card">
+      <div class="form-layout">
+        <!-- Account Information Section -->
+        <div class="form-section">
+          <h3 class="section-title">{{ 'profile.accountInformation' | translate }}</h3>
+          <div class="form-fields">
+            <input
+              type="text"
+              [(ngModel)]="formData.fullName"
+              [disabled]="!isEditMode()"
+              class="form-input"
+              [placeholder]="'profile.fullName' | translate"
+            />
+            <input
+              type="email"
+              [(ngModel)]="formData.email"
+              [disabled]="!isEditMode()"
+              class="form-input"
+              [placeholder]="'profile.email' | translate"
+            />
+            <input
+              type="tel"
+              [(ngModel)]="formData.phone"
+              [disabled]="!isEditMode()"
+              class="form-input"
+              [placeholder]="'profile.phone' | translate"
+            />
+          </div>
+        </div>
+
+        <!-- Time Zone Section -->
+        <div class="form-section">
+          <h3 class="section-title">{{ 'profile.timeZone' | translate }}</h3>
+          <div class="form-fields">
+            <select
+              [(ngModel)]="formData.timezoneId"
+              [disabled]="!isEditMode()"
+              class="form-select"
+            >
+              @for (timezone of store.timezones(); track timezone.id) {
+                <option [value]="timezone.id">{{ timezone.name }}</option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <!-- Current Plan Section -->
+        <div class="form-section full-width">
+          <h3 class="section-title">{{ 'profile.currentPlan' | translate }}</h3>
+          <div class="plan-field-wrapper">
+            <div class="form-fields">
+              <input
+                type="text"
+                [value]="store.currentPlan()?.name + ' - $' + store.currentPlan()?.price"
+                disabled
+                class="form-input"
+                [placeholder]="'profile.plan' | translate"
+              />
+            </div>
+            <div class="plan-actions">
+              <button
+                mat-icon-button
+                (click)="openPaymentModal()"
+                [matTooltip]="'profile.managePayment' | translate"
+                class="plan-action-btn"
+              >
+                <mat-icon>credit_card</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                (click)="cancelPlan()"
+                [matTooltip]="'profile.cancelPlan' | translate"
+                [disabled]="formData.planId === 'freemium'"
+                class="plan-action-btn cancel-btn"
+              >
+                <mat-icon>cancel</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                (click)="upgradePlan()"
+                [matTooltip]="'profile.upgradePlan' | translate"
+                [disabled]="formData.planId === 'enterprise'"
+                class="plan-action-btn upgrade-btn"
+              >
+                <mat-icon>upgrade</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- App Language Section -->
+        <div class="form-section full-width">
+          <h3 class="section-title">{{ 'profile.appLanguage' | translate }}</h3>
+          <div class="form-fields">
+            <input
+              type="text"
+              [value]="currentLanguageName()"
+              disabled
+              class="form-input"
+              [placeholder]="'profile.language' | translate"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Save Button -->
+      @if (isEditMode()) {
+        <div class="form-actions">
+          <button
+            class="save-btn"
+            (click)="saveProfile()"
+            [disabled]="store.isLoading()"
+          >
+            {{ 'profile.save' | translate }}
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+}
