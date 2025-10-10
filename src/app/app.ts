@@ -12,8 +12,22 @@ export class App implements OnInit {
   private translate = inject(TranslateService);
 
   ngOnInit(): void {
-    // Set default language
     this.translate.addLangs(['en', 'es']);
-    this.translate.use('en');
+
+    this.translate.setDefaultLang('en');
+
+    const savedLang = localStorage.getItem('selectedLanguage');
+    let initialLang = 'en'; // Default to English as primary language
+
+    if (savedLang && ['en', 'es'].includes(savedLang)) {
+      initialLang = savedLang;
+    } else if (this.translate.getBrowserLang()?.match(/es/)) {
+      initialLang = 'es';
+    }
+
+    this.translate.use(initialLang);
+    localStorage.setItem('selectedLanguage', initialLang);
+
+    console.log('Primary language set to English. Current language:', initialLang);
   }
 }
