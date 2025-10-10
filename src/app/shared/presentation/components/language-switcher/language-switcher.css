@@ -1,0 +1,19 @@
+.language-switcher {
+  background-color: #4A90E2;
+  border-radius: 8px;
+}
+
+.language-switcher ::ng-deep .mat-button-toggle {
+  color: white;
+  border: none;
+}
+
+.language-switcher ::ng-deep .mat-button-toggle.mat-button-toggle-checked {
+  background-color: #2171D6;
+  font-weight: 600;
+}
+
+.language-switcher ::ng-deep .mat-button-toggle-label-content {
+  line-height: 32px;
+  padding: 0 12px;
+}

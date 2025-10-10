@@ -1,0 +1,183 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "profile": "Perfil",
+    "medicines": "Medicinas",
+    "temperature": "Gestión de Temperatura",
+    "configuration": "Configuración",
+    "logout": "Cerrar Sesión"
+  },
+  "common": {
+    "welcome": "Bienvenido",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Agregar",
+    "create": "Crear",
+    "update": "Actualizar",
+    "confirm": "Confirmar",
+    "close": "Cerrar",
+    "remove": "Quitar"
+  },
+  "medicaments": {
+    "title": "Control de Medicamentos",
+    "searchPlaceholder": "Buscar medicamento...",
+    "addMedicament": "Agregar Medicamento",
+    "editMedicament": "Editar Medicamento",
+    "addNewMedicament": "Agregar Nuevo Medicamento",
+    "name": "Nombre del Medicamento",
+    "temperature": "Temperatura",
+    "expirationDate": "Fecha de Vencimiento",
+    "image": "Imagen",
+    "selectImage": "Seleccionar Imagen",
+    "active": "Activo",
+    "expired": "Expirado",
+    "noMedicaments": "No se encontraron medicamentos",
+    "noMedicamentsDescription": "Comienza agregando tu primer medicamento al sistema",
+    "addFirstMedicament": "Agregar Primer Medicamento",
+    "deleteConfirmTitle": "Confirmar Eliminación",
+    "deleteConfirm": "¿Estás seguro de que quieres eliminar {{name}}?",
+    "fillAllFields": "Por favor completa todos los campos obligatorios",
+    "invalidFileType": "Por favor selecciona un archivo de imagen válido",
+    "fileTooLarge": "El archivo es demasiado grande. Máximo 5MB permitido",
+    "createSuccess": "Medicamento creado exitosamente",
+    "updateSuccess": "Medicamento actualizado exitosamente",
+    "deleteSuccess": "Medicamento eliminado exitosamente",
+    "selectDateHint": "Haz clic en el ícono del calendario para seleccionar una fecha",
+    "placeholders": {
+      "name": "Ingresa el nombre del medicamento",
+      "temperature": "Ej: 2°C - 8°C",
+      "selectImage": "Haz clic para seleccionar una imagen"
+    }
+  },
+  "temperature": {
+    "title": "Gestión de Temperatura",
+    "addMedicine": "Agregar Medicina",
+    "editMedicine": "Editar Medicina",
+    "addNewMedicine": "Agregar Nueva Medicina",
+    "medicineName": "Nombre de la Medicina",
+    "medicineList": "Lista de Medicinas",
+    "temperature": "Temperatura",
+    "expirationDate": "Fecha de Vencimiento",
+    "actions": "Acciones",
+    "noMedicines": "No hay medicinas registradas",
+    "noMedicinesDescription": "Comienza agregando tu primera medicina de temperatura al sistema",
+    "noMedicinesEmptyDescription": "Ve a la sección de Medicamentos para agregar nuevas medicinas al sistema",
+    "addFirstMedicine": "Agregar Primera Medicina",
+    "deleteConfirmTitle": "Confirmar Eliminación",
+    "deleteConfirm": "¿Estás seguro de que quieres eliminar {{name}}?",
+    "fillAllFields": "Por favor completa todos los campos obligatorios",
+    "createSuccess": "Medicina creada exitosamente",
+    "updateSuccess": "Medicina actualizada exitosamente",
+    "deleteSuccess": "Medicina eliminada exitosamente",
+    "placeholders": {
+      "medicineName": "Ingresa el nombre de la medicina",
+      "temperature": "Ej: 2°C - 8°C"
+    },
+    "errors": {
+      "loadingMedicines": "Error cargando medicinas",
+      "creatingMedicine": "Error creando medicina",
+      "updatingMedicine": "Error actualizando medicina",
+      "deletingMedicine": "Error eliminando medicina"
+    }
+  },
+  "profile": {
+    "title": "Perfil",
+    "editProfile": "Editar Perfil",
+    "accountInformation": "Información de la Cuenta",
+    "timeZone": "Zona Horaria",
+    "currentPlan": "Plan Actual",
+    "appLanguage": "Idioma de la Aplicación",
+    "fullName": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "plan": "Plan",
+    "language": "Idioma",
+    "cancel": "Cancelar",
+    "save": "Guardar Cambios",
+    "month": "mes",
+    "managePayment": "Gestionar Método de Pago",
+    "cancelPlan": "Cancelar Plan",
+    "upgradePlan": "Mejorar Plan",
+    "syncLanguage": "Sincronizar con App",
+    "modals": {
+      "cancelPlan": {
+        "title": "Cancelar Plan",
+        "message": "¿Estás seguro de que quieres cancelar tu plan actual? Serás degradado al plan Freemium.",
+        "confirm": "Sí, Cancelar Plan",
+        "cancel": "No, Mantener Plan"
+      },
+      "paymentRequired": {
+        "title": "Método de Pago Requerido",
+        "message": "Necesitas agregar un método de pago antes de mejorar tu plan.",
+        "confirm": "Agregar Método de Pago"
+      },
+      "upgradePlan": {
+        "title": "Mejorar a {{planName}}",
+        "message": "¿Estás seguro de que quieres mejorar al plan {{planName}} por ${{price}}/mes?",
+        "confirm": "Sí, Mejorar"
+      }
+    }
+  },
+  "payment": {
+    "title": "Método de Pago",
+    "cardholderName": "Nombre del Titular",
+    "cardNumber": "Número de Tarjeta",
+    "expiryMonth": "Mes",
+    "expiryYear": "Año",
+    "cvv": "CVV",
+    "expires": "Vence",
+    "addPayment": "Agregar Pago",
+    "updatePayment": "Actualizar Pago",
+    "editPayment": "Editar",
+    "deletePayment": "Eliminar",
+    "errors": {
+      "cardholderRequired": "El nombre del titular es requerido",
+      "cardNumberRequired": "El número de tarjeta es requerido",
+      "cardNumberInvalid": "Número de tarjeta inválido",
+      "monthInvalid": "Mes inválido (01-12)",
+      "yearInvalid": "Año inválido (YYYY)",
+      "cvvInvalid": "CVV inválido (3-4 dígitos)"
+    },
+    "modals": {
+      "delete": {
+        "title": "Eliminar Método de Pago",
+        "message": "¿Estás seguro de que quieres eliminar este método de pago? Esta acción no se puede deshacer.",
+        "confirm": "Sí, Eliminar"
+      }
+    }
+  },
+  "configuration": {
+    "title": "Configuración",
+    "notifications": {
+      "title": "Notificaciones",
+      "expiration": "Alertas de Vencimiento",
+      "system": "Actualizaciones del Sistema",
+      "customer": "Notificaciones del Cliente",
+      "push": "Push Notifications"
+    },
+    "security": {
+      "title": "Seguridad y Privacidad",
+      "password": "Cambiar Contraseña",
+      "2fa": "Autenticación en dos pasos",
+      "sessions": "Gestión de Sesiones",
+      "alternate": "Agregar dirección de correo alternativa"
+    },
+    "support": {
+      "title": "Soporte y Ayuda",
+      "features": "Características",
+      "about": "Sobre Nosotros"
+    }
+  },
+  "home": {
+    "projectOverview": "Resumen del Proyecto",
+    "medicinesExpired": "Medicinas Vencidas",
+    "notificationFeed": "Feed de Notificaciones",
+    "noNotifications": "No hay notificaciones en este momento",
+    "expiration": "Vencimiento",
+    "expired": "Vencido"
+  }
+}

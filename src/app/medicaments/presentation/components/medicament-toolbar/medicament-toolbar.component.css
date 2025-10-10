@@ -1,0 +1,83 @@
+/* Material Toolbar Styles */
+.header-toolbar {
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+  margin-bottom: 24px;
+}
+
+.title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.search-field {
+  height: 45px;
+  margin-right: 16px;
+  width: 200px;
+}
+
+.search-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+.search-field .mat-mdc-floating-label {
+  font-size: 14px !important;
+  top: 16px !important;
+}
+
+.search-field .mat-mdc-form-field-label-wrapper {
+  top: -8px !important;
+}
+
+.search-field .mdc-floating-label {
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+}
+
+.search-field .mdc-floating-label--float-above {
+  transform: translateY(-20px) scale(0.85) !important;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-field {
+    width: 200px;
+  }
+
+  .header-toolbar {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    height: auto;
+  }
+
+  .spacer {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-field {
+    width: 100%;
+  }
+
+  .header-toolbar {
+    text-align: center;
+  }
+
+  .title-with-icon {
+    justify-content: center;
+  }
+}

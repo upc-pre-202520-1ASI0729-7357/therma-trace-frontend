@@ -1,0 +1,184 @@
+{
+  "nav": {
+    "home": "Home",
+    "profile": "Profile",
+    "medicines": "Medicines",
+    "temperature": "Temperature Management",
+    "configuration": "Configuration",
+    "logout": "Logout"
+  },
+  "common": {
+    "welcome": "Welcome",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "create": "Create",
+    "update": "Update",
+    "confirm": "Confirm",
+    "close": "Close",
+    "remove": "Remove"
+  },
+  "medicaments": {
+    "title": "Medicament Control",
+    "searchPlaceholder": "Search medicament...",
+    "addMedicament": "Add Medicament",
+    "editMedicament": "Edit Medicament",
+    "addNewMedicament": "Add New Medicament",
+    "name": "Medicament Name",
+    "temperature": "Temperature",
+    "expirationDate": "Expiration Date",
+    "image": "Image",
+    "selectImage": "Select Image",
+    "active": "Active",
+    "expired": "Expired",
+    "noMedicaments": "No medicaments found",
+    "noMedicamentsDescription": "Start by adding your first medicament to the system",
+    "addFirstMedicament": "Add First Medicament",
+    "deleteConfirmTitle": "Confirm Deletion",
+    "deleteConfirm": "Are you sure you want to delete {{name}}?",
+    "fillAllFields": "Please fill in all required fields",
+    "invalidFileType": "Please select a valid image file",
+    "fileTooLarge": "File is too large. Maximum 5MB allowed",
+    "createSuccess": "Medicament created successfully",
+    "updateSuccess": "Medicament updated successfully",
+    "deleteSuccess": "Medicament deleted successfully",
+    "selectDateHint": "Click the calendar icon to select a date",
+    "placeholders": {
+      "name": "Enter medicament name",
+      "temperature": "E.g: 2°C - 8°C",
+      "selectImage": "Click to select an image"
+    }
+  },
+  "temperature": {
+    "title": "Temperature Management",
+    "addMedicine": "Add Medicine",
+    "editMedicine": "Edit Medicine",
+    "addNewMedicine": "Add New Medicine",
+    "medicineName": "Medicine Name",
+    "medicineList": "Medicine List",
+    "temperature": "Temperature",
+    "expirationDate": "Expiration Date",
+    "actions": "Actions",
+    "noMedicines": "No medicines registered",
+    "noMedicinesDescription": "Start by adding your first temperature medicine to the system",
+    "noMedicinesEmptyDescription": "Go to the Medicaments section to add new medicines to the system",
+    "addFirstMedicine": "Add First Medicine",
+    "deleteConfirmTitle": "Confirm Deletion",
+    "deleteConfirm": "Are you sure you want to delete {{name}}?",
+    "fillAllFields": "Please fill in all required fields",
+    "createSuccess": "Medicine created successfully",
+    "updateSuccess": "Medicine updated successfully",
+    "deleteSuccess": "Medicine deleted successfully",
+    "placeholders": {
+      "medicineName": "Enter medicine name",
+      "temperature": "E.g: 2°C - 8°C"
+    },
+    "errors": {
+      "loadingMedicines": "Error loading medicines",
+      "creatingMedicine": "Error creating medicine",
+      "updatingMedicine": "Error updating medicine",
+      "deletingMedicine": "Error deleting medicine"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "editProfile": "Edit Profile",
+    "accountInformation": "Account Information",
+    "timeZone": "Time Zone",
+    "currentPlan": "Current Plan",
+    "appLanguage": "App Language",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "plan": "Plan",
+    "language": "Language",
+    "cancel": "Cancel",
+    "save": "Save Changes",
+    "month": "month",
+    "managePayment": "Manage Payment Method",
+    "cancelPlan": "Cancel Plan",
+    "upgradePlan": "Upgrade Plan",
+    "syncLanguage": "Sync with App",
+    "modals": {
+      "cancelPlan": {
+        "title": "Cancel Plan",
+        "message": "Are you sure you want to cancel your current plan? You will be downgraded to Freemium plan.",
+        "confirm": "Yes, Cancel Plan",
+        "cancel": "No, Keep Plan"
+      },
+      "paymentRequired": {
+        "title": "Payment Method Required",
+        "message": "You need to add a payment method before upgrading your plan.",
+        "confirm": "Add Payment Method"
+      },
+      "upgradePlan": {
+        "title": "Upgrade to {{planName}}",
+        "message": "Are you sure you want to upgrade to {{planName}} plan for ${{price}}/month?",
+        "confirm": "Yes, Upgrade"
+      }
+    }
+  },
+  "payment": {
+    "title": "Payment Method",
+    "cardholderName": "Cardholder Name",
+    "cardNumber": "Card Number",
+    "expiryMonth": "Month",
+    "expiryYear": "Year",
+    "cvv": "CVV",
+    "expires": "Expires",
+    "addPayment": "Add Payment",
+    "updatePayment": "Update Payment",
+    "editPayment": "Edit",
+    "deletePayment": "Delete",
+    "errors": {
+      "cardholderRequired": "Cardholder name is required",
+      "cardNumberRequired": "Card number is required",
+      "cardNumberInvalid": "Invalid card number",
+      "monthInvalid": "Invalid month (01-12)",
+      "yearInvalid": "Invalid year (YYYY)",
+      "cvvInvalid": "Invalid CVV (3-4 digits)"
+    },
+    "modals": {
+      "delete": {
+        "title": "Delete Payment Method",
+        "message": "Are you sure you want to delete this payment method? This action cannot be undone.",
+        "confirm": "Yes, Delete"
+      }
+
+    }
+  },
+  "configuration": {
+    "title": "Configuration",
+    "notifications": {
+      "title": "Notifications",
+      "expiration": "Expiration Alerts",
+      "system": "System Updates",
+      "customer": "Customer Notifications",
+      "push": "Push Notifications"
+    },
+    "security": {
+      "title": "Security and Privacy",
+      "password": "Change Password",
+      "2fa": "Two-Factor Authentication",
+      "sessions": "Session Management",
+      "alternate": "Add Alternate mail address"
+    },
+    "support": {
+      "title": "Support and Help",
+      "features": "Features",
+      "about": "About Us"
+    }
+  },
+  "home": {
+    "projectOverview": "Project Overview",
+    "medicinesExpired": "Medicines Expired",
+    "notificationFeed": "Notification Feed",
+    "noNotifications": "No notifications at this time",
+    "expiration": "Expiration",
+    "expired": "Expired"
+  }
+}

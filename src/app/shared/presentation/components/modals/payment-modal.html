@@ -1,0 +1,103 @@
+<div class="payment-modal">
+  <div class="modal-header">
+    <h2 mat-dialog-title>{{ 'payment.title' | translate }}</h2>
+    <button mat-icon-button (click)="close()" class="close-btn">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div mat-dialog-content class="modal-content">
+    @if (hasPaymentMethod() && !isEditMode()) {
+      <!-- Display Mode -->
+      <div class="payment-info-display">
+        <div class="info-row">
+          <mat-icon class="card-icon">credit_card</mat-icon>
+          <div class="card-details">
+            <p class="card-type">{{ data.paymentMethod?.cardType }}</p>
+            <p class="card-number">{{ displayCardNumber }}</p>
+            <p class="card-expiry">{{ 'payment.expires' | translate }}: {{ displayExpiry }}</p>
+            <p class="cardholder-name">{{ data.paymentMethod?.cardholderName }}</p>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <!-- Edit/Create Mode -->
+      <form [formGroup]="paymentForm" class="payment-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'payment.cardholderName' | translate }}</mat-label>
+          <input matInput formControlName="cardholderName" />
+          @if (paymentForm.get('cardholderName')?.hasError('required') && paymentForm.get('cardholderName')?.touched) {
+            <mat-error>{{ 'payment.errors.cardholderRequired' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'payment.cardNumber' | translate }}</mat-label>
+          <input matInput formControlName="cardNumber" maxlength="16" />
+          @if (paymentForm.get('cardNumber')?.hasError('required') && paymentForm.get('cardNumber')?.touched) {
+            <mat-error>{{ 'payment.errors.cardNumberRequired' | translate }}</mat-error>
+          }
+          @if (paymentForm.get('cardNumber')?.hasError('pattern') && paymentForm.get('cardNumber')?.touched) {
+            <mat-error>{{ 'payment.errors.cardNumberInvalid' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>{{ 'payment.expiryMonth' | translate }}</mat-label>
+            <input matInput formControlName="expiryMonth" maxlength="2" />
+            @if (paymentForm.get('expiryMonth')?.hasError('pattern') && paymentForm.get('expiryMonth')?.touched) {
+              <mat-error>{{ 'payment.errors.monthInvalid' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>{{ 'payment.expiryYear' | translate }}</mat-label>
+            <input matInput formControlName="expiryYear" maxlength="4" />
+            @if (paymentForm.get('expiryYear')?.hasError('pattern') && paymentForm.get('expiryYear')?.touched) {
+              <mat-error>{{ 'payment.errors.yearInvalid' | translate }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'payment.cvv' | translate }}</mat-label>
+          <input matInput formControlName="cvv" type="password" maxlength="3" />
+          @if (paymentForm.get('cvv')?.hasError('pattern') && paymentForm.get('cvv')?.touched) {
+            <mat-error>{{ 'payment.errors.cvvInvalid' | translate }}</mat-error>
+          }
+        </mat-form-field>
+      </form>
+    }
+  </div>
+
+  <div mat-dialog-actions class="modal-actions">
+    @if (hasPaymentMethod() && !isEditMode()) {
+      <!-- Display Mode Actions -->
+      <button mat-stroked-button color="warn" (click)="deletePayment()" class="delete-btn">
+        <mat-icon>delete</mat-icon>
+        {{ 'payment.deletePayment' | translate }}
+      </button>
+      <div class="spacer"></div>
+      <button mat-raised-button color="primary" (click)="enableEdit()">
+        {{ 'payment.editPayment' | translate }}
+      </button>
+    } @else {
+      <!-- Edit/Create Mode Actions -->
+      @if (isEditMode()) {
+        <button mat-button (click)="cancelEdit()">
+          {{ 'common.cancel' | translate }}
+        </button>
+      }
+      <div class="spacer"></div>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="savePayment()"
+        [disabled]="!paymentForm.valid"
+      >
+        {{ hasPaymentMethod() ? ('payment.updatePayment' | translate) : ('payment.addPayment' | translate) }}
+      </button>
+    }
+  </div>
+</div>

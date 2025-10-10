@@ -1,0 +1,34 @@
+<div class="main-layout">
+  <app-top-bar
+    [userName]="userName()"
+    [userRole]="userRole()"
+    [userAvatar]="userAvatar()"
+    [mailCount]="mailCount()"
+    [notificationCount]="notificationCount()"
+    (menuToggle)="toggleDrawer()"
+  />
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav
+      #drawer
+      [mode]="isMobile() ? 'over' : 'side'"
+      [opened]="isMobile() ? drawerOpened() : true"
+      [fixedInViewport]="isMobile()"
+      (closed)="closeDrawer()"
+      class="sidenav"
+    >
+      <app-sidebar
+        [userName]="userName()"
+        [userRole]="userRole()"
+        [userAvatar]="userAvatar()"
+        (logout)="handleLogout()"
+      />
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <main class="main-content">
+        <router-outlet />
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
