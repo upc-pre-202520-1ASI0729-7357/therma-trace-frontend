@@ -1,0 +1,138 @@
+<div class="dashboard-container">
+  @if (dashboardStore.loading()) {
+    <div class="loading-container">
+      <p>{{ 'common.loading' | translate }}</p>
+    </div>
+  }
+
+  @if (dashboardStore.error() && !dashboardStore.loading()) {
+    <div class="error-container">
+      <p class="error-message">{{ dashboardStore.error() }}</p>
+    </div>
+  }
+
+  @if (!dashboardStore.loading() && dashboardStore.dashboardData()) {
+    <div class="dashboard-content">
+      <!-- Left Section: Charts -->
+      <div class="charts-section">
+        <!-- Project Overview Card -->
+        <mat-card class="chart-card">
+          <mat-card-header>
+            <mat-card-title>{{ 'home.projectOverview' | translate }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="pie-chart-container">
+              @if (dashboardStore.medicinesByCategory().length > 0) {
+                <svg viewBox="0 0 200 200" class="pie-chart">
+                  @for (category of dashboardStore.medicinesByCategory(); track category.category; let i = $index) {
+                    <g>
+                      <path
+                        [attr.d]="getPieSlicePath(i, dashboardStore.medicinesByCategory())"
+                        [attr.fill]="getColor(i)"
+                        class="pie-slice"
+                      />
+                    </g>
+                  }
+                </svg>
+                <div class="pie-legend">
+                  @for (category of dashboardStore.medicinesByCategory(); track category.category; let i = $index) {
+                    <div class="legend-item">
+                      <span class="legend-color" [style.background-color]="getColor(i)"></span>
+                      <span class="legend-label">{{ category.category }}: {{ category.percentage }}%</span>
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Medicines Expired Trend Card -->
+        <mat-card class="chart-card">
+          <mat-card-header>
+            <mat-card-title>{{ 'home.medicinesExpired' | translate }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="line-chart-container">
+              @if (dashboardStore.expiredTrend().length > 0) {
+                <svg viewBox="0 0 600 300" class="line-chart">
+                  <!-- Grid lines -->
+                  <line x1="50" y1="250" x2="550" y2="250" stroke="#e0e0e0" stroke-width="1"/>
+                  <line x1="50" y1="200" x2="550" y2="200" stroke="#e0e0e0" stroke-width="1"/>
+                  <line x1="50" y1="150" x2="550" y2="150" stroke="#e0e0e0" stroke-width="1"/>
+                  <line x1="50" y1="100" x2="550" y2="100" stroke="#e0e0e0" stroke-width="1"/>
+                  <line x1="50" y1="50" x2="550" y2="50" stroke="#e0e0e0" stroke-width="1"/>
+
+                  <!-- Y-axis labels -->
+                  <text x="30" y="255" font-size="12" fill="#666">0</text>
+                  <text x="30" y="205" font-size="12" fill="#666">20</text>
+                  <text x="30" y="155" font-size="12" fill="#666">40</text>
+                  <text x="30" y="105" font-size="12" fill="#666">60</text>
+                  <text x="30" y="55" font-size="12" fill="#666">80</text>
+
+                  <!-- Line path -->
+                  <polyline
+                    [attr.points]="getLineChartPoints()"
+                    fill="none"
+                    stroke="#4FC3F7"
+                    stroke-width="3"
+                  />
+
+                  <!-- Data points -->
+                  @for (point of dashboardStore.expiredTrend(); track point.month; let i = $index) {
+                    <circle
+                      [attr.cx]="50 + (i * 80)"
+                      [attr.cy]="250 - (point.count * 2)"
+                      r="4"
+                      fill="#4FC3F7"
+                    />
+                  }
+
+                  <!-- X-axis labels -->
+                  @for (point of dashboardStore.expiredTrend(); track point.month; let i = $index) {
+                    <text
+                      [attr.x]="50 + (i * 80)"
+                      y="270"
+                      text-anchor="middle"
+                      font-size="12"
+                      fill="#666"
+                    >{{ point.month }}</text>
+                  }
+                </svg>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Right Section: Notification Feed -->
+      <div class="notification-section">
+        <mat-card class="notification-card">
+          <mat-card-header>
+            <mat-card-title>{{ 'home.notificationFeed' | translate }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="notifications-list">
+              @if (dashboardStore.notifications().length === 0) {
+                <p class="no-notifications">{{ 'home.noNotifications' | translate }}</p>
+              }
+              @for (notification of dashboardStore.notifications(); track notification.id) {
+                <div class="notification-item">
+                  <mat-icon [class.expired]="notification.type === 'expired'" [class.expiring]="notification.type === 'expiring'">
+                    {{ getNotificationIcon(notification.type) }}
+                  </mat-icon>
+                  <div class="notification-content">
+                    <span class="notification-text">
+                      {{ notification.type === 'expired' ? ('home.expired' | translate) : ('home.expiration' | translate) }}:
+                      {{ notification.medicineName }} | {{ formatDate(notification.expirationDate) }}
+                    </span>
+                  </div>
+                </div>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  }
+</div>

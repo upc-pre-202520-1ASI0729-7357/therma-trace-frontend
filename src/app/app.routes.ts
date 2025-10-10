@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { MainLayout } from './shared/presentation/components/main-layout/main-layout';
-import { Home } from './shared/presentation/views/home/home';
+import { HomeView } from './home/presentation/views/home-view/home-view';
 import { ConfigurationView } from './shared/presentation/views/configuration-view/configuration-view';
 import { Profile } from './user/presentation/views/profile/profile';
 import { PageNotFound } from './shared/presentation/views/page-not-found/page-not-found';
@@ -13,7 +13,7 @@ export const routes: Routes = [
     component: MainLayout,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: Home },
+      { path: 'home', component: HomeView },
       { path: 'configuration', component: ConfigurationView },
       { path: 'medicaments', component: MedicamentControl },
       { path: 'temperature', component: TemperatureManagement },
