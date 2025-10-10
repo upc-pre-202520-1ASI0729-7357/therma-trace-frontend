@@ -1,0 +1,98 @@
+/* Material Card Styles */
+.medicament-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.medicament-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,.15);
+}
+
+.card-image-container {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.medicament-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.medicament-card:hover .medicament-image {
+  transform: scale(1.05);
+}
+
+.card-actions-overlay {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.medicament-card:hover .card-actions-overlay {
+  opacity: 1;
+}
+
+.card-actions-overlay button {
+  backdrop-filter: blur(4px);
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Card Content */
+.mat-mdc-card-header {
+  padding: 16px 16px 8px 16px;
+}
+
+.mat-mdc-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.mat-mdc-card-content {
+  padding: 0 16px 16px 16px;
+}
+
+/* Status Chips */
+.status-active {
+  background-color: #e8f5e8 !important;
+  color: #2e7d32 !important;
+}
+
+.status-expired {
+  background-color: #ffebee !important;
+  color: #c62828 !important;
+}
+
+/* Medicine Info */
+.medicament-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #666;
+  min-width: 80px;
+}
+
+.info-value {
+  font-weight: 600;
+  color: #333;
+}
