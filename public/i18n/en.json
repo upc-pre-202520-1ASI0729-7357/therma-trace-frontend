@@ -2,7 +2,7 @@
   "nav": {
     "home": "Home",
     "profile": "Profile",
-    "medicaments": "Medicaments",
+    "medicines": "Medicines",
     "temperature": "Temperature Management",
     "configuration": "Configuration",
     "logout": "Logout"
@@ -14,6 +14,74 @@
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",
-    "edit": "Edit"
+    "edit": "Edit",
+    "add": "Add",
+    "create": "Create",
+    "update": "Update",
+    "confirm": "Confirm",
+    "close": "Close",
+    "remove": "Remove"
+  },
+  "medicaments": {
+    "title": "Medicament Control",
+    "searchPlaceholder": "Search medicament...",
+    "addMedicament": "Add Medicament",
+    "editMedicament": "Edit Medicament",
+    "addNewMedicament": "Add New Medicament",
+    "name": "Medicament Name",
+    "temperature": "Temperature",
+    "expirationDate": "Expiration Date",
+    "image": "Image",
+    "selectImage": "Select Image",
+    "active": "Active",
+    "expired": "Expired",
+    "noMedicaments": "No medicaments found",
+    "noMedicamentsDescription": "Start by adding your first medicament to the system",
+    "addFirstMedicament": "Add First Medicament",
+    "deleteConfirmTitle": "Confirm Deletion",
+    "deleteConfirm": "Are you sure you want to delete {{name}}?",
+    "fillAllFields": "Please fill in all required fields",
+    "invalidFileType": "Please select a valid image file",
+    "fileTooLarge": "File is too large. Maximum 5MB allowed",
+    "createSuccess": "Medicament created successfully",
+    "updateSuccess": "Medicament updated successfully",
+    "deleteSuccess": "Medicament deleted successfully",
+    "selectDateHint": "Click the calendar icon to select a date",
+    "placeholders": {
+      "name": "Enter medicament name",
+      "temperature": "E.g: 2°C - 8°C",
+      "selectImage": "Click to select an image"
+    }
+  },
+  "temperature": {
+    "title": "Temperature Management",
+    "addMedicine": "Add Medicine",
+    "editMedicine": "Edit Medicine",
+    "addNewMedicine": "Add New Medicine",
+    "medicineName": "Medicine Name",
+    "medicineList": "Medicine List",
+    "temperature": "Temperature",
+    "expirationDate": "Expiration Date",
+    "actions": "Actions",
+    "noMedicines": "No medicines registered",
+    "noMedicinesDescription": "Start by adding your first temperature medicine to the system",
+    "noMedicinesEmptyDescription": "Go to the Medicaments section to add new medicines to the system",
+    "addFirstMedicine": "Add First Medicine",
+    "deleteConfirmTitle": "Confirm Deletion",
+    "deleteConfirm": "Are you sure you want to delete {{name}}?",
+    "fillAllFields": "Please fill in all required fields",
+    "createSuccess": "Medicine created successfully",
+    "updateSuccess": "Medicine updated successfully",
+    "deleteSuccess": "Medicine deleted successfully",
+    "placeholders": {
+      "medicineName": "Enter medicine name",
+      "temperature": "E.g: 2°C - 8°C"
+    },
+    "errors": {
+      "loadingMedicines": "Error loading medicines",
+      "creatingMedicine": "Error creating medicine",
+      "updatingMedicine": "Error updating medicine",
+      "deletingMedicine": "Error deleting medicine"
+    }
   }
 }
