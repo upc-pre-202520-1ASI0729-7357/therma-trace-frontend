@@ -15,5 +15,27 @@
     "cancel": "Cancelar",
     "delete": "Eliminar",
     "edit": "Editar"
+  },
+  "configuration": {
+    "title": "Configuración",
+    "notifications": {
+      "title": "Notificaciones",
+      "expiration": "Alertas de Vencimiento",
+      "system": "Actualizaciones del Sistema",
+      "customer": "Notificaciones del Cliente",
+      "push": "Push Notifications"
+    },
+    "security": {
+      "title": "Seguridad y Privacidad",
+      "password": "Cambiar Contraseña",
+      "2fa": "Autenticación en dos pasos",
+      "sessions": "Gestión de Sesiones",
+      "alternate": "Agregar dirección de correo alternativa"
+    },
+    "support": {
+      "title": "Soporte y Ayuda",
+      "features": "Características",
+      "about": "Sobre Nosotros"
+    }
   }
 }
