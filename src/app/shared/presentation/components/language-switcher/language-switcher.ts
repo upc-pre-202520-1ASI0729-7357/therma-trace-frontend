@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -11,21 +11,18 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './language-switcher.html',
   styleUrl: './language-switcher.css'
 })
-export class LanguageSwitcher {
-  protected currentLang: string = 'en';
+export class LanguageSwitcher implements OnInit {
+  protected currentLang = signal<string>('en');
 
   /** List of available language codes */
   protected languages: string[] = ['en', 'es'];
   /** Translation service instance */
-  private translate: TranslateService;
+  private translate = inject(TranslateService);
 
-  /**
-   * Creates an instance of LanguageSwitcher.
-   * Initializes the current language from the translation service.
-   */
-  constructor() {
-    this.translate = inject(TranslateService);
-    this.currentLang = this.translate.getCurrentLang();
+  ngOnInit() {
+    // Initialize with current language from TranslateService
+    const currentLang = this.translate.currentLang || this.translate.getDefaultLang() || 'en';
+    this.currentLang.set(currentLang);
   }
 
   /**
@@ -36,10 +33,12 @@ export class LanguageSwitcher {
    */
   useLanguage(language: string) {
     console.log('Language switcher clicked! Changing to:', language);
-    console.log('Current language before change:', this.currentLang);
     this.translate.use(language);
-    this.currentLang = language;
-    console.log('Current language after change:', this.currentLang);
-    console.log('TranslateService current lang:', this.translate.currentLang);
+    this.currentLang.set(language);
+
+    // Save to localStorage for persistence
+    localStorage.setItem('selectedLanguage', language);
+
+    console.log('Language changed to:', language);
   }
 }

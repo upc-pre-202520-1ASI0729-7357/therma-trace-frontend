@@ -1,0 +1,39 @@
+<div class="temperature-management">
+  <!-- Toolbar -->
+  <app-temperature-toolbar></app-temperature-toolbar>
+
+  <!-- Loading State -->
+  <app-loading-state *ngIf="temperatureMedicineStore.loading()"></app-loading-state>
+
+  <!-- Error State -->
+  <app-error-state
+    *ngIf="temperatureMedicineStore.error()"
+    [errorMessage]="temperatureMedicineStore.error()">
+  </app-error-state>
+
+  <!-- Temperature Table -->
+  <app-temperature-table
+    *ngIf="!temperatureMedicineStore.loading() && temperatureMedicineStore.temperatureMedicines().length > 0"
+    [medicines]="temperatureMedicineStore.temperatureMedicines()"
+    (edit)="openEditForm($event)"
+    (delete)="deleteMedicine($event)">
+  </app-temperature-table>
+
+  <!-- Empty State -->
+  <app-empty-state
+    *ngIf="!temperatureMedicineStore.loading() && temperatureMedicineStore.temperatureMedicines().length === 0"
+    icon="inventory_2"
+    title="temperature.noMedicines"
+    description="temperature.noMedicinesEmptyDescription"
+    [showButton]="false">
+  </app-empty-state>
+
+  <!-- Temperature Form Modal -->
+  <app-temperature-form
+    *ngIf="showForm"
+    [medicine]="editingMedicine"
+    [loading]="temperatureMedicineStore.loading()"
+    (close)="closeForm()"
+    (submit)="onSubmit($event)">
+  </app-temperature-form>
+</div>

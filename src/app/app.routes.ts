@@ -2,7 +2,10 @@ import { Routes } from '@angular/router';
 import { MainLayout } from './shared/presentation/components/main-layout/main-layout';
 import { Home } from './shared/presentation/views/home/home';
 import { ConfigurationView } from './shared/presentation/views/configuration-view/configuration-view';
+import { Profile } from './user/presentation/views/profile/profile';
 import { PageNotFound } from './shared/presentation/views/page-not-found/page-not-found';
+import { TemperatureManagement } from './temperature/presentation/view/medicine-management';
+import { MedicamentControl } from './medicaments/presentation/views/medicament-control';
 
 export const routes: Routes = [
   {
@@ -12,6 +15,9 @@ export const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: Home },
       { path: 'configuration', component: ConfigurationView },
+      { path: 'medicaments', component: MedicamentControl },
+      { path: 'temperature', component: TemperatureManagement },
+      { path: 'profile', component: Profile },
       { path: '**', component: PageNotFound }
     ]
   }

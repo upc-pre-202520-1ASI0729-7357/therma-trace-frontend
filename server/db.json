@@ -1,0 +1,202 @@
+{
+  "profile": {
+    "id": 1,
+    "fullName": "Juan Roberto, Carita Cruz",
+    "email": "bryancarita@gmail.com",
+    "phone": "+51 933 702 728",
+    "avatar": "/assets/images/img.png",
+    "role": "Nurse",
+    "timezoneId": "america_los_angeles",
+    "planId": "premium",
+    "languageId": "es",
+    "paymentMethodId": 1
+  },
+  "timezones": [
+    {
+      "id": "utc_minus_5",
+      "name": "UTC -5 (Eastern Time)",
+      "offset": "-05:00"
+    },
+    {
+      "id": "america_lima",
+      "name": "UTC - 5 Lima",
+      "offset": "-05:00"
+    },
+    {
+      "id": "america_new_york",
+      "name": "UTC - 5 New York",
+      "offset": "-05:00"
+    },
+    {
+      "id": "america_chicago",
+      "name": "UTC - 6 Chicago",
+      "offset": "-06:00"
+    },
+    {
+      "id": "america_los_angeles",
+      "name": "UTC - 8 Los Angeles",
+      "offset": "-08:00"
+    },
+    {
+      "id": "europe_london",
+      "name": "UTC + 0 London",
+      "offset": "+00:00"
+    },
+    {
+      "id": "europe_paris",
+      "name": "UTC + 1 Paris",
+      "offset": "+01:00"
+    },
+    {
+      "id": "europe_athens",
+      "name": "UTC + 2 Athens",
+      "offset": "+02:00"
+    },
+    {
+      "id": "asia_dubai",
+      "name": "UTC + 4 Dubai",
+      "offset": "+04:00"
+    },
+    {
+      "id": "asia_tokyo",
+      "name": "UTC +9 Tokyo",
+      "offset": "+09:00"
+    },
+    {
+      "id": "australia_sydney",
+      "name": "UTC +10 Sydney",
+      "offset": "+10:00"
+    }
+  ],
+  "plans": [
+    {
+      "id": "freemium",
+      "name": "Freemium",
+      "price": 0,
+      "features": [
+        "Basic temperature monitoring",
+        "Up to 5 medications",
+        "Email notifications"
+      ]
+    },
+    {
+      "id": "premium",
+      "name": "Premium",
+      "price": 60,
+      "features": [
+        "Advanced temperature monitoring",
+        "Unlimited medications",
+        "SMS + Email notifications",
+        "Temperature alerts",
+        "Export reports"
+      ]
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise",
+      "price": 99.99,
+      "features": [
+        "All Premium features",
+        "Multi-location support",
+        "API access",
+        "Dedicated support",
+        "Custom integrations",
+        "Advanced analytics"
+      ]
+    }
+  ],
+  "paymentMethods": [
+    {
+      "id": 1,
+      "cardType": "Mastercard",
+      "lastFourDigits": "1323",
+      "expiryMonth": "12",
+      "expiryYear": "2024",
+      "cardholderName": "Test"
+    }
+  ],
+  "languages": [
+    {
+      "id": "en",
+      "name": "English",
+      "code": "en"
+    },
+    {
+      "id": "es",
+      "name": "Español",
+      "code": "es"
+    }
+  ],
+  "alerts": [
+    {
+      "id": 1,
+      "zone": "Cusco",
+      "message": "Temperatura fuera de rango",
+      "date": "2025-10-09 09:30"
+    },
+    {
+      "id": 2,
+      "zone": "Arequipa",
+      "message": "Sensor desconectado",
+      "date": "2025-10-09 10:15"
+    }
+  ],
+  "medicines": [
+    {
+      "id": 1,
+      "name": "Penicilina",
+      "temperature": "2°",
+      "expirationDate": "2025-11-30",
+      "image": "https://richmondvet.com.ar/wp-content/uploads/2020/03/Render-Pencilline-100mL-V1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Insulina",
+      "temperature": "2°",
+      "expirationDate": "2026-01-15",
+      "image": "https://farmacorp.com/cdn/shop/files/109243_0e235075-1d31-454a-aa14-bf48a2d6b714_1200x1200.jpg?v=1732893681"
+    },
+    {
+      "id": 3,
+      "name": "Insulina Dispro",
+      "temperature": "2°",
+      "expirationDate": "2026-03-10",
+      "image": "https://farmaciauniversalpe.vtexassets.com/arquivos/ids/156465/12142_1.jpg?v=638417261799200000"
+    },
+    {
+      "id": 4,
+      "name": "Insulina Lispro",
+      "temperature": "2°",
+      "expirationDate": "2026-05-25",
+      "image": "https://farmaciauniversalpe.vtexassets.com/arquivos/ids/156465/12142_1.jpg?v=638417261799200000"
+    },
+    {
+      "id": 5,
+      "name": "Insulina Glargina",
+      "temperature": "2°",
+      "expirationDate": "2026-07-31",
+      "image": "https://i5.walmartimages.com.mx/gr/images/product-images/img_large/00750134902515L.jpg?odnHeight=612&odnWidth=612&odnBg=FFFFFF"
+    },
+    {
+      "id": 6,
+      "name": "Ceftriaxona",
+      "temperature": "2°",
+      "expirationDate": "2026-11-05",
+      "image": "https://difem.cl/wp-content/uploads/2025/02/2800004_Ceftriaxona-1-g_600x600px.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Vancomicina",
+      "temperature": "2°",
+      "expirationDate": "2027-02-28",
+      "image": "https://farmaciauniversalpe.vtexassets.com/arquivos/ids/161807-800-auto?v=638745613536100000&width=800&height=auto&aspect=true"
+    },
+    {
+      "id": 8,
+      "name": "Cefalexina",
+      "temperature": "2°",
+      "expirationDate": "2027-04-15",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoIkMxaASzqhs3wAbPFZOLq8PeYcfd34iW0A&s"
+    }
+  ]
+}

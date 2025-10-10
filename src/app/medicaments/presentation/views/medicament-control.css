@@ -1,0 +1,542 @@
+.medicament-control {
+  min-height: 100vh;
+  background-color: #fafafa;
+}
+
+/* Material Toolbar Styles */
+.header-toolbar {
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+  margin-bottom: 24px;
+}
+
+.title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.search-field {
+  height: 45px;
+  margin-right: 16px;
+  width: 200px;
+}
+
+.search-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+.search-field .mat-mdc-floating-label {
+  font-size: 14px !important;
+  top: 16px !important;
+}
+
+.search-field .mat-mdc-form-field-label-wrapper {
+  top: -8px !important;
+}
+
+.search-field .mdc-floating-label {
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+}
+
+.search-field .mdc-floating-label--float-above {
+  transform: translateY(-20px) scale(0.85) !important;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Loading and Error States */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  gap: 16px;
+}
+
+.loading-container p {
+  color: #666;
+  font-weight: 500;
+}
+
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  margin: 16px;
+  background-color: #ffebee;
+  border-radius: 8px;
+  border-left: 4px solid #f44336;
+}
+
+.error-container p {
+  color: #c62828;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Material Cards Grid */
+.medicaments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+  padding: 0 24px 24px;
+}
+
+.medicament-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.medicament-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,.15);
+}
+
+.card-image-container {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.medicament-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.medicament-card:hover .medicament-image {
+  transform: scale(1.05);
+}
+
+.card-actions-overlay {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.medicament-card:hover .card-actions-overlay {
+  opacity: 1;
+}
+
+.card-actions-overlay button {
+  backdrop-filter: blur(4px);
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Material Card Content */
+.mat-mdc-card-header {
+  padding: 16px 16px 8px 16px;
+}
+
+.mat-mdc-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.mat-mdc-card-content {
+  padding: 0 16px 16px 16px;
+}
+
+/* Status Chips */
+.status-active {
+  background-color: #e8f5e8 !important;
+  color: #2e7d32 !important;
+}
+
+.status-expired {
+  background-color: #ffebee !important;
+  color: #c62828 !important;
+}
+
+/* Medicine Info */
+.medicament-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #666;
+  min-width: 80px;
+}
+
+.info-value {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  width: 4rem;
+  height: 4rem;
+  color: #bdbdbd;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 0 8px 0;
+  color: #666;
+}
+
+.empty-state p {
+  color: #999;
+  margin-bottom: 24px;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+  padding: 16px;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 500px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-content .mat-mdc-card {
+  box-shadow: none !important;
+  border-radius: 12px;
+  margin: 0;
+}
+
+.modal-content .mat-mdc-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 16px;
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-content .mat-mdc-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10001;
+}
+
+/* Form Styles */
+.medicament-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  margin-bottom: 8px;
+}
+
+.image-upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.image-preview-container {
+  position: relative;
+  display: inline-block;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 300px;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.image-preview {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(244, 67, 54, 0.9) !important;
+  color: white !important;
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+.remove-image-btn:hover {
+  background-color: rgba(244, 67, 54, 1) !important;
+  transform: scale(1.1);
+}
+
+.remove-image-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+/* File input button styling */
+.mat-mdc-form-field .mat-mdc-icon-button[matsuffix] {
+  color: #50ACF9;
+}
+
+.mat-mdc-form-field .mat-mdc-icon-button[matsuffix]:hover {
+  background-color: rgba(80, 172, 249, 0.1);
+}
+
+.upload-hint {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.upload-hint mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.drag-drop-zone {
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background-color: #fafafa;
+}
+
+.drag-drop-zone:hover {
+  border-color: #50ACF9;
+  background-color: rgba(80, 172, 249, 0.05);
+}
+
+.drag-drop-zone.dragover {
+  border-color: #50ACF9;
+  background-color: rgba(80, 172, 249, 0.1);
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .search-field {
+    width: 200px;
+  }
+
+  .medicaments-grid {
+    grid-template-columns: 1fr;
+    padding: 0 16px 16px;
+  }
+
+  .header-toolbar {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    height: auto;
+  }
+
+  .spacer {
+    display: none;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-field {
+    width: 100%;
+  }
+
+  .header-toolbar {
+    text-align: center;
+  }
+
+  .title-with-icon {
+    justify-content: center;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+}
+
+.mat-mdc-card {
+  --mdc-elevated-card-container-elevation: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+}
+
+.mat-mdc-raised-button.mat-accent {
+  --mdc-protected-button-container-color: #50ACF9;
+  --mdc-protected-button-label-text-color: white;
+}
+
+.mat-mdc-raised-button.mat-primary {
+  --mdc-protected-button-container-color: #50ACF9;
+}
+
+.mat-primary {
+  --mdc-theme-primary: #50ACF9;
+}
+
+
+::ng-deep .mat-mdc-snack-bar-container {
+  background-color: #323232 !important;
+  color: white !important;
+  z-index: 20000 !important;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12) !important;
+}
+
+::ng-deep .mat-mdc-snack-bar-label {
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+::ng-deep .mat-mdc-snack-bar-action {
+  color: #50ACF9 !important;
+  font-weight: 600 !important;
+}
+
+::ng-deep .mdc-snackbar {
+  z-index: 20000 !important;
+}
+
+::ng-deep .mdc-snackbar__surface {
+  background-color: #323232 !important;
+  color: white !important;
+}
+
+/* Datepicker Styles - Fix transparency issue */
+::ng-deep .mat-datepicker-popup {
+  z-index: 30000 !important;
+}
+
+::ng-deep .mat-datepicker-content {
+  background-color: white !important;
+  box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12) !important;
+  border-radius: 8px !important;
+}
+
+::ng-deep .mat-calendar {
+  background-color: white !important;
+}
+
+::ng-deep .mat-calendar-header {
+  background-color: white !important;
+  color: #333 !important;
+}
+
+::ng-deep .mat-calendar-table-header {
+  color: #666 !important;
+}
+
+::ng-deep .mat-calendar-body-cell-content {
+  background-color: transparent !important;
+  color: #333 !important;
+}
+
+::ng-deep .mat-calendar-body-selected {
+  background-color: #50ACF9 !important;
+  color: white !important;
+}
+
+::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+  border-color: #50ACF9 !important;
+}
+
+::ng-deep .mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+  background-color: rgba(80, 172, 249, 0.1) !important;
+}
+
+::ng-deep .mat-calendar-arrow {
+  border-top-color: #50ACF9 !important;
+}
+
+::ng-deep .mat-datepicker-toggle-active {
+  color: #50ACF9 !important;
+}

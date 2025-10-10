@@ -1,0 +1,99 @@
+/* Material Table Card */
+.table-card {
+  margin: 0 24px 24px;
+  overflow: hidden;
+}
+
+.table-card .mat-mdc-card-header {
+  padding: 24px 24px 16px;
+}
+
+.table-card .mat-mdc-card-content {
+  padding: 0 0 16px 0;
+}
+
+/* Material Table Styles */
+.medicines-table {
+  width: 100%;
+  background: transparent;
+}
+
+.medicines-table .mat-mdc-header-cell {
+  font-weight: 600;
+  color: #424242;
+  border-bottom: 2px solid #e0e0e0;
+  padding: 16px 24px;
+}
+
+.medicines-table .mat-mdc-cell {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.header-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
+  color: #50ACF9;
+}
+
+.mat-mdc-row:hover {
+  background-color: #f8f9fa;
+}
+
+/* Action Buttons */
+.mat-mdc-icon-button.mat-primary {
+  color: #50ACF9;
+}
+
+.mat-mdc-icon-button.mat-warn {
+  color: #f44336;
+}
+
+.mat-mdc-icon-button:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Table Material Design Enhancements */
+.mat-mdc-table {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.mat-mdc-header-row {
+  background-color: #fafafa;
+  border-bottom: 2px solid #50ACF9;
+}
+
+.mat-mdc-row:nth-child(even) {
+  background-color: #fdfdfd;
+}
+
+.mat-mdc-row:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .table-card {
+    margin: 0 16px 16px;
+  }
+
+  .medicines-table .mat-mdc-header-cell,
+  .medicines-table .mat-mdc-cell {
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .medicines-table {
+    font-size: 14px;
+  }
+
+  .medicines-table .mat-mdc-header-cell,
+  .medicines-table .mat-mdc-cell {
+    padding: 8px 12px;
+  }
+}
