@@ -146,14 +146,14 @@
       "id": 1,
       "name": "Penicilina",
       "temperature": "2°",
-      "expirationDate": "2025-11-30",
+      "expirationDate": "2025-10-15",
       "image": "https://richmondvet.com.ar/wp-content/uploads/2020/03/Render-Pencilline-100mL-V1.jpg"
     },
     {
       "id": 2,
       "name": "Insulina",
       "temperature": "2°",
-      "expirationDate": "2026-01-15",
+      "expirationDate": "2025-10-30",
       "image": "https://farmacorp.com/cdn/shop/files/109243_0e235075-1d31-454a-aa14-bf48a2d6b714_1200x1200.jpg?v=1732893681"
     },
     {
