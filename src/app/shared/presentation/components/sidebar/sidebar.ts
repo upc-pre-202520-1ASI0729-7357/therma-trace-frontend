@@ -34,7 +34,7 @@ export class Sidebar {
   protected navItems: NavItem[] = [
     { label: 'nav.home', icon: 'home', route: '/home' },
     { label: 'nav.profile', icon: 'person', route: '/profile' },
-    { label: 'nav.medicaments', icon: 'medication', route: '/medicaments' },
+    { label: 'nav.medicines', icon: 'medication', route: '/medicaments' },
     { label: 'nav.temperature', icon: 'thermostat', route: '/temperature' },
     { label: 'nav.configuration', icon: 'settings', route: '/configuration' }
   ];
