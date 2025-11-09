@@ -6,19 +6,32 @@ import { Profile } from './user/presentation/views/profile/profile';
 import { PageNotFound } from './shared/presentation/views/page-not-found/page-not-found';
 import { TemperatureManagement } from './temperature/presentation/view/medicine-management';
 import { MedicamentControl } from './medicaments/presentation/views/medicament-control';
+import { Login } from './auth/presentation/views/login/login';
+import { Register } from './auth/presentation/views/register/register';
+import { ForgotPassword } from './auth/presentation/views/forgot-password/forgot-password';
 
 export const routes: Routes = [
+  // Default route - redirect to login
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
+  // Auth routes (outside MainLayout - no authentication required)
+  { path: 'login', component: Login },
+  { path: 'register', component: Register },
+  { path: 'forgot-password', component: ForgotPassword },
+
+  // Protected routes (inside MainLayout - will require authentication guard later)
   {
     path: '',
     component: MainLayout,
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeView },
       { path: 'configuration', component: ConfigurationView },
       { path: 'medicaments', component: MedicamentControl },
       { path: 'temperature', component: TemperatureManagement },
-      { path: 'profile', component: Profile },
-      { path: '**', component: PageNotFound }
+      { path: 'profile', component: Profile }
     ]
-  }
+  },
+
+  // 404 - must be last
+  { path: '**', component: PageNotFound }
 ];
