@@ -28,7 +28,7 @@ import {
 })
 export class UserApiEndpoint extends BaseApiEndpoint<User, UserResponse, UserAssembler> {
   protected basePath = '/profile';
-  protected apiUrl = `${environment.apiUrl}/api/v1`;
+  protected apiUrl = environment.apiUrl;
   protected assembler = inject(UserAssembler);
 
   /**
@@ -65,7 +65,7 @@ export class UserApiEndpoint extends BaseApiEndpoint<User, UserResponse, UserAss
 })
 export class TimezoneApiEndpoint extends BaseStringApiEndpoint<Timezone, TimezoneResponse, TimezoneAssembler> {
   protected basePath = '/timezones';
-  protected apiUrl = `${environment.apiUrl}/api/v1`;
+  protected apiUrl = environment.apiUrl;
   protected assembler = inject(TimezoneAssembler);
 }
 
@@ -77,7 +77,7 @@ export class TimezoneApiEndpoint extends BaseStringApiEndpoint<Timezone, Timezon
 })
 export class PlanApiEndpoint extends BaseStringApiEndpoint<Plan, PlanResponse, PlanAssembler> {
   protected basePath = '/plans';
-  protected apiUrl = `${environment.apiUrl}/api/v1`;
+  protected apiUrl = environment.apiUrl;
   protected assembler = inject(PlanAssembler);
 }
 
@@ -89,7 +89,7 @@ export class PlanApiEndpoint extends BaseStringApiEndpoint<Plan, PlanResponse, P
 })
 export class PaymentMethodApiEndpoint extends BaseApiEndpoint<PaymentMethod, PaymentMethodResponse, PaymentMethodAssembler> {
   protected basePath = '/paymentMethods';
-  protected apiUrl = `${environment.apiUrl}/api/v1`;
+  protected apiUrl = environment.apiUrl;
   protected assembler = inject(PaymentMethodAssembler);
 }
 
@@ -101,6 +101,6 @@ export class PaymentMethodApiEndpoint extends BaseApiEndpoint<PaymentMethod, Pay
 })
 export class LanguageApiEndpoint extends BaseStringApiEndpoint<Language, LanguageResponse, LanguageAssembler> {
   protected basePath = '/languages';
-  protected apiUrl = `${environment.apiUrl}/api/v1`;
+  protected apiUrl = environment.apiUrl;
   protected assembler = inject(LanguageAssembler);
 }

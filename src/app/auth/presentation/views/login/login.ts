@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { TranslateModule } from '@ngx-translate/core';
 import { LoginCredentials } from '../../../domain/entities/login-credentials.entity';
 import { LanguageSwitcher } from '../../../../shared/presentation/components/language-switcher/language-switcher';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -35,10 +36,12 @@ export class Login {
   loginForm: FormGroup;
   hidePassword = true;
   isLoading = false;
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -48,18 +51,38 @@ export class Login {
   }
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
+    if (this.loginForm.valid && !this.isLoading) {
       this.isLoading = true;
+      this.errorMessage = '';
+
       const credentials: LoginCredentials = this.loginForm.value;
 
-      // TODO: Implement authentication service call
-      console.log('Login credentials:', credentials);
+      this.authService.signIn(credentials).subscribe({
+        next: (response) => {
+          console.log('✅ Login successful:', response);
+          console.log('✅ JWT Token stored in localStorage');
 
-      // Simulate API call
-      setTimeout(() => {
-        this.isLoading = false;
-        this.router.navigate(['/home']);
-      }, 1500);
+          // Navigate to home/dashboard
+          this.router.navigate(['/home']);
+        },
+        error: (error) => {
+          console.error('❌ Login error:', error);
+
+          // Handle specific error messages from backend
+          if (error.error?.message) {
+            this.errorMessage = error.error.message;
+          } else if (error.status === 404 || error.status === 400) {
+            this.errorMessage = 'Invalid email or password';
+          } else {
+            this.errorMessage = 'Login failed. Please try again.';
+          }
+
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
     } else {
       this.loginForm.markAllAsTouched();
     }

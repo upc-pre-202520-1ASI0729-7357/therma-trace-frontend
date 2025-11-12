@@ -12,6 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateModule } from '@ngx-translate/core';
 import { RegisterData } from '../../../domain/entities/register-data.entity';
 import { LanguageSwitcher } from '../../../../shared/presentation/components/language-switcher/language-switcher';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -38,10 +39,14 @@ export class Register {
   hidePassword = true;
   hideConfirmPassword = true;
   isLoading = false;
+  errorMessage = '';
+  showSuccessMessage = false;
+  successMessage = '';
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.registerForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
@@ -82,18 +87,41 @@ export class Register {
   }
 
   onSubmit(): void {
-    if (this.registerForm.valid) {
+    if (this.registerForm.valid && !this.isLoading) {
       this.isLoading = true;
+      this.errorMessage = '';
+
       const registerData: RegisterData = this.registerForm.value;
 
-      // TODO: Implement authentication service call
-      console.log('Register data:', registerData);
+      this.authService.signUp(registerData).subscribe({
+        next: (response) => {
+          console.log('✅ Registration successful:', response);
+          this.showSuccessMessage = true;
+          this.successMessage = 'Registration successful! Redirecting to login...';
 
-      // Simulate API call
-      setTimeout(() => {
-        this.isLoading = false;
-        this.router.navigate(['/login']);
-      }, 1500);
+          // Redirect to login after 2 seconds
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 2000);
+        },
+        error: (error) => {
+          console.error('❌ Registration error:', error);
+
+          // Handle specific error messages from backend
+          if (error.error?.message) {
+            this.errorMessage = error.error.message;
+          } else if (error.status === 400) {
+            this.errorMessage = 'Email already exists or invalid data';
+          } else {
+            this.errorMessage = 'Registration failed. Please try again.';
+          }
+
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
     } else {
       this.registerForm.markAllAsTouched();
     }
