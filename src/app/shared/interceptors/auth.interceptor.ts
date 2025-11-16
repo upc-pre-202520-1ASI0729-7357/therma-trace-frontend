@@ -16,6 +16,14 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   // Get JWT token from localStorage
   const token = localStorage.getItem('jwt_token');
 
+  // TEMP LOG: help diagnose 403 issues (remove in production)
+  try {
+    const payload = token ? JSON.parse(atob(token.split('.')[1])) : null;
+    console.log('[authInterceptor] req:', req.method, req.url, 'tokenExists=', !!token, 'payload=', payload ? { exp: payload.exp, role: payload.role ?? payload.roles ?? null } : null);
+  } catch (err) {
+    console.log('[authInterceptor] req:', req.method, req.url, 'tokenExists=', !!token, 'payload= <invalid token>');
+  }
+
   // If token exists, clone request and add Authorization header
   if (token) {
     const clonedRequest = req.clone({

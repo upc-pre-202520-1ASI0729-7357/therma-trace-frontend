@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 import { DashboardData, DashboardStats, MedicinesByCategory, ExpiredMedicinesData, NotificationItem } from '../domain/model/dashboard.entity';
 import { environment } from '../../../environments/environment';
 
@@ -7,15 +9,12 @@ import { environment } from '../../../environments/environment';
 })
 export class DashboardApiService {
   private readonly API_URL = `${environment.apiUrl}/medicines`;
+  private http = inject(HttpClient);
 
   async getDashboardData(): Promise<DashboardData> {
     try {
-      // Fetch medicines from API
-      const response = await fetch(this.API_URL);
-      if (!response.ok) {
-        throw new Error('Error fetching dashboard data');
-      }
-      const medicines = await response.json();
+      // Fetch medicines from API using HttpClient (goes through authInterceptor)
+      const medicines = await firstValueFrom(this.http.get<any[]>(this.API_URL));
 
       // Calculate dashboard statistics
       return this.calculateDashboardData(medicines);
