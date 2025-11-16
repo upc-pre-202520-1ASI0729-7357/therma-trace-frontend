@@ -11,9 +11,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TemperatureMedicine } from '../../../domain/model/medicine.entity';
 
 export interface TemperatureFormData {
-  name: string;
-  temperature: string;
-  expirationDate: string;
+  medicineId: number;
+  temperature: number | null;
+  state: string;
+  stock: number | null;
+  location: string;
 }
 
 @Component({
@@ -46,23 +48,34 @@ export interface TemperatureFormData {
         <mat-card-content>
           <form (ngSubmit)="onSubmit()" class="medicine-form">
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>{{ 'temperature.medicineName' | translate }}</mat-label>
-              <input matInput [(ngModel)]="formData.name" name="name" required
-                     [placeholder]="'temperature.placeholders.medicineName' | translate">
-              <mat-icon matSuffix>medication</mat-icon>
+              <mat-label>{{ 'temperature.medicineId' | translate }}</mat-label>
+              <input matInput type="number" [(ngModel)]="formData.medicineId" name="medicineId" required
+                     [placeholder]="'temperature.placeholders.medicineId' | translate">
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>{{ 'temperature.temperature' | translate }}</mat-label>
-              <input matInput [(ngModel)]="formData.temperature" name="temperature" required
+              <input matInput type="number" step="0.1" [(ngModel)]="formData.temperature" name="temperature" required
                      [placeholder]="'temperature.placeholders.temperature' | translate">
               <mat-icon matSuffix>thermostat</mat-icon>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>{{ 'temperature.expirationDate' | translate }}</mat-label>
-              <input matInput type="date" [(ngModel)]="formData.expirationDate" name="expirationDate" required>
-              <mat-icon matSuffix>event</mat-icon>
+              <mat-label>{{ 'temperature.state' | translate }}</mat-label>
+              <input matInput [(ngModel)]="formData.state" name="state" required
+                     [placeholder]="'temperature.placeholders.state' | translate">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>{{ 'temperature.stock' | translate }}</mat-label>
+              <input matInput type="number" [(ngModel)]="formData.stock" name="stock" required
+                     [placeholder]="'temperature.placeholders.stock' | translate">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>{{ 'temperature.location' | translate }}</mat-label>
+              <input matInput [(ngModel)]="formData.location" name="location" required
+                     [placeholder]="'temperature.placeholders.location' | translate">
             </mat-form-field>
           </form>
         </mat-card-content>
@@ -90,23 +103,27 @@ export class TemperatureFormComponent implements OnInit {
   @Output() submit = new EventEmitter<TemperatureFormData>();
 
   formData: TemperatureFormData = {
-    name: '',
-    temperature: '',
-    expirationDate: ''
+    medicineId: 0,
+    temperature: null,
+    state: '',
+    stock: null,
+    location: ''
   };
 
   ngOnInit(): void {
     if (this.medicine) {
       this.formData = {
-        name: this.medicine.name,
+        medicineId: this.medicine.medicine?.id ?? 0,
         temperature: this.medicine.temperature,
-        expirationDate: this.medicine.expirationDate
+        state: this.medicine.state,
+        stock: this.medicine.stock,
+        location: this.medicine.location
       };
     }
   }
 
   onSubmit(): void {
-    if (!this.formData.name || !this.formData.temperature || !this.formData.expirationDate) {
+    if (!this.formData.medicineId || this.formData.temperature === null || this.formData.stock === null || !this.formData.state || !this.formData.location) {
       return;
     }
     this.submit.emit(this.formData);

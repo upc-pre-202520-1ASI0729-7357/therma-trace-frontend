@@ -57,7 +57,8 @@ export class TemperatureManagement implements OnInit {
   async onSubmit(formData: TemperatureFormData) {
     if (!this.editingMedicine) return;
 
-    if (!formData.name || !formData.temperature || !formData.expirationDate) {
+    // Validate required fields
+    if (!formData.medicineId || formData.temperature === null || formData.stock === null || !formData.state || !formData.location) {
       this.snackBar.open(
         this.translate.instant('common.error') + ': ' + this.translate.instant('temperature.fillAllFields'),
         this.translate.instant('common.close'),
@@ -69,9 +70,11 @@ export class TemperatureManagement implements OnInit {
     try {
       const updateRequest: UpdateTemperatureMedicineRequest = {
         id: this.editingMedicine.id,
-        name: formData.name,
-        temperature: formData.temperature,
-        expirationDate: formData.expirationDate
+        medicineId: formData.medicineId,
+        temperature: Number(formData.temperature),
+        state: formData.state,
+        stock: Number(formData.stock),
+        location: formData.location
       };
 
       await this.temperatureMedicineStore.updateTemperatureMedicine(updateRequest);
@@ -94,7 +97,7 @@ export class TemperatureManagement implements OnInit {
   async deleteMedicine(medicine: TemperatureMedicine) {
     const dialogData: ConfirmDialogData = {
       title: this.translate.instant('temperature.deleteConfirmTitle'),
-      message: this.translate.instant('temperature.deleteConfirm', { name: medicine.name }),
+      message: this.translate.instant('temperature.deleteConfirm', { name: medicine.medicine?.name ?? '' }),
       confirmText: this.translate.instant('common.delete'),
       cancelText: this.translate.instant('common.cancel'),
       icon: 'warning',
