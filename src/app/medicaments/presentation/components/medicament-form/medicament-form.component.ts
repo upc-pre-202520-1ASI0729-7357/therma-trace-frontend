@@ -15,9 +15,8 @@ import { Medicament } from '../../../domain/model/medicament.entity';
 
 export interface MedicamentFormData {
   name: string;
-  temperature: string;
   expirationDate: Date | null;
-  image: string;
+  imageUrl: string;
 }
 
 @Component({
@@ -57,13 +56,6 @@ export interface MedicamentFormData {
               <input matInput [(ngModel)]="formData.name" name="name" required
                      [placeholder]="'medicaments.placeholders.name' | translate">
               <mat-icon matSuffix>medication</mat-icon>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>{{ 'medicaments.temperature' | translate }}</mat-label>
-              <input matInput [(ngModel)]="formData.temperature" name="temperature" required
-                     [placeholder]="'medicaments.placeholders.temperature' | translate">
-              <mat-icon matSuffix>thermostat</mat-icon>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="full-width">
@@ -128,9 +120,8 @@ export class MedicamentFormComponent implements OnInit {
 
   formData: MedicamentFormData = {
     name: '',
-    temperature: '',
     expirationDate: null,
-    image: ''
+    imageUrl: ''
   };
 
   imagePreview: string | null = null;
@@ -150,14 +141,14 @@ export class MedicamentFormComponent implements OnInit {
     const expirationDate = this.medicament.expirationDate ? new Date(this.medicament.expirationDate) : null;
     this.formData = {
       name: this.medicament.name,
-      temperature: this.medicament.temperature,
       expirationDate: expirationDate,
-      image: this.medicament.image
+      imageUrl: this.medicament.imageUrl || (this.medicament as any).image || ''
     };
 
     // Configurar preview si hay una imagen existente
-    if (this.medicament.image && this.medicament.image !== 'https://via.placeholder.com/300x200?text=Medicine') {
-      this.imagePreview = this.medicament.image;
+    const existingImage = this.medicament.imageUrl || (this.medicament as any).image;
+    if (existingImage && existingImage !== 'https://via.placeholder.com/300x200?text=Medicine') {
+      this.imagePreview = existingImage;
       this.selectedFileName = 'Imagen actual';
     } else {
       this.imagePreview = null;
@@ -168,9 +159,8 @@ export class MedicamentFormComponent implements OnInit {
   private resetForm(): void {
     this.formData = {
       name: '',
-      temperature: '',
       expirationDate: null,
-      image: ''
+      imageUrl: ''
     };
     this.imagePreview = null;
     this.selectedFileName = '';
@@ -201,7 +191,7 @@ export class MedicamentFormComponent implements OnInit {
         const result = e.target?.result as string;
         if (result) {
           this.imagePreview = result;
-          this.formData.image = result;
+          this.formData.imageUrl = result;
         }
       };
       reader.readAsDataURL(file);
@@ -211,11 +201,11 @@ export class MedicamentFormComponent implements OnInit {
   removeImage(): void {
     this.imagePreview = null;
     this.selectedFileName = '';
-    this.formData.image = '';
+    this.formData.imageUrl = '';
   }
 
   onSubmit(): void {
-    if (!this.formData.name || !this.formData.temperature || !this.formData.expirationDate) {
+    if (!this.formData.name || !this.formData.expirationDate) {
       return;
     }
     this.submit.emit(this.formData);
