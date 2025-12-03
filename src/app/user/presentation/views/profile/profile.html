@@ -107,7 +107,7 @@
                 mat-icon-button
                 (click)="cancelPlan()"
                 [matTooltip]="'profile.cancelPlan' | translate"
-                [disabled]="formData.planId === 'freemium'"
+                [disabled]="formData.planId.toLowerCase() === 'freemium'"
                 class="plan-action-btn cancel-btn"
               >
                 <mat-icon>cancel</mat-icon>
@@ -116,7 +116,7 @@
                 mat-icon-button
                 (click)="upgradePlan()"
                 [matTooltip]="'profile.upgradePlan' | translate"
-                [disabled]="formData.planId === 'enterprise'"
+                [disabled]="formData.planId.toLowerCase() === 'enterprise'"
                 class="plan-action-btn upgrade-btn"
               >
                 <mat-icon>upgrade</mat-icon>

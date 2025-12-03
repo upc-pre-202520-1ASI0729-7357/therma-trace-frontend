@@ -40,11 +40,35 @@ export interface PlanResponse extends BaseResponse {
  */
 export interface PaymentMethodResponse extends BaseResponse {
   id: number;
-  cardType: string;
+  cardholderName: string;
   lastFourDigits: string;
+  maskedCardNumber: string;
+  cardType: string;
   expiryMonth: string;
   expiryYear: string;
+  expiry: string;
+}
+
+/**
+ * Create Payment Method request interface
+ */
+export interface CreatePaymentMethodRequest {
   cardholderName: string;
+  cardNumber: string;
+  expiryMonth: string;
+  expiryYear: string;
+  cvv: string;
+}
+
+/**
+ * Update Payment Method request interface
+ */
+export interface UpdatePaymentMethodRequest {
+  cardholderName: string;
+  cardNumber: string;
+  expiryMonth: string;
+  expiryYear: string;
+  cvv: string;
 }
 
 /**

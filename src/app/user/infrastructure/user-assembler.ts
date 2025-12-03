@@ -118,22 +118,26 @@ export class PaymentMethodAssembler extends BaseAssembler<PaymentMethod, Payment
   toEntity(response: PaymentMethodResponse): PaymentMethod {
     return {
       id: response.id,
-      cardType: response.cardType,
+      cardholderName: response.cardholderName,
       lastFourDigits: response.lastFourDigits,
+      maskedCardNumber: response.maskedCardNumber,
+      cardType: response.cardType,
       expiryMonth: response.expiryMonth,
       expiryYear: response.expiryYear,
-      cardholderName: response.cardholderName
+      expiry: response.expiry
     };
   }
 
   toResource(entity: PaymentMethod): PaymentMethodResponse {
     return {
       id: entity.id,
-      cardType: entity.cardType,
+      cardholderName: entity.cardholderName,
       lastFourDigits: entity.lastFourDigits,
+      maskedCardNumber: entity.maskedCardNumber,
+      cardType: entity.cardType,
       expiryMonth: entity.expiryMonth,
       expiryYear: entity.expiryYear,
-      cardholderName: entity.cardholderName
+      expiry: entity.expiry
     };
   }
 }

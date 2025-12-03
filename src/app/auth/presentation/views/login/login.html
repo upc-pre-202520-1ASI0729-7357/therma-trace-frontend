@@ -74,8 +74,10 @@
         [disabled]="isLoading"
       >
         @if (isLoading) {
-          <mat-icon class="spinner">refresh</mat-icon>
-          {{ 'auth.login.signingIn' | translate }}
+          <ng-container>
+            <mat-icon class="spinner">refresh</mat-icon>
+            {{ 'auth.login.signingIn' | translate }}
+          </ng-container>
         } @else {
           {{ 'auth.login.signIn' | translate }}
         }
