@@ -13,16 +13,10 @@ export class MedicamentApiService {
   constructor(private http: HttpClient) {}
 
   private buildHeaders(contentType?: string) {
-    const token = localStorage.getItem('jwt_token');
-
-    let headers = new HttpHeaders();
     if (contentType) {
-      headers = headers.set('Content-Type', contentType);
+      return { headers: new HttpHeaders({ 'Content-Type': contentType }) };
     }
-    if (token) {
-      headers = headers.set('Authorization', `Bearer ${token}`);
-    }
-    return { headers };
+    return {};
   }
 
   async getMedicaments(): Promise<Medicament[]> {

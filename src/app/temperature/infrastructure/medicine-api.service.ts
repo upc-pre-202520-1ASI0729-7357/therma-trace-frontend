@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TemperatureMedicine, CreateTemperatureMedicineRequest, UpdateTemperatureMedicineRequest } from '../domain/model/medicine.entity';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http'; // Add HttpHeaders
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
@@ -12,8 +12,17 @@ export class TemperatureMedicineApiService {
 
   constructor(private http: HttpClient) {}
 
+
+  private buildHeaders(contentType?: string) {
+    if (contentType) {
+      return { headers: new HttpHeaders({ 'Content-Type': contentType }) };
+    }
+    return {};
+  }
+
   async getTemperatureMedicines(): Promise<TemperatureMedicine[]> {
-    const data = await firstValueFrom(this.http.get<any[]>(this.API_URL));
+    const options = this.buildHeaders();
+    const data = await firstValueFrom(this.http.get<any[]>(this.API_URL, options));
 
     return data.map((item: any) => ({
       id: Number(item.id),
@@ -31,13 +40,14 @@ export class TemperatureMedicineApiService {
   }
 
   async createTemperatureMedicine(medicine: CreateTemperatureMedicineRequest): Promise<TemperatureMedicine> {
+    const options = this.buildHeaders('application/json'); // ADD THIS
     const item = await firstValueFrom(this.http.post<any>(this.API_URL, {
       medicineId: medicine.medicineId,
       temperature: medicine.temperature,
       state: medicine.state,
       stock: medicine.stock,
       location: medicine.location
-    }));
+    }, options));
 
     return {
       id: Number(item.id),
@@ -55,13 +65,14 @@ export class TemperatureMedicineApiService {
   }
 
   async updateTemperatureMedicine(medicine: UpdateTemperatureMedicineRequest): Promise<TemperatureMedicine> {
+    const options = this.buildHeaders('application/json');
     const item = await firstValueFrom(this.http.put<any>(`${this.API_URL}/${medicine.id}`, {
       medicineId: medicine.medicineId,
       temperature: medicine.temperature,
       state: medicine.state,
       stock: medicine.stock,
       location: medicine.location
-    }));
+    }, options)); // ADD options
 
     return {
       id: Number(item.id),
@@ -79,6 +90,7 @@ export class TemperatureMedicineApiService {
   }
 
   async deleteTemperatureMedicine(id: number): Promise<void> {
-    await firstValueFrom(this.http.delete<void>(`${this.API_URL}/${id}`));
+    const options = this.buildHeaders();
+    await firstValueFrom(this.http.delete<void>(`${this.API_URL}/${id}`, options));
   }
 }
