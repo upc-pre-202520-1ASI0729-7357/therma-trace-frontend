@@ -8,8 +8,8 @@ import { HttpInterceptorFn } from '@angular/common/http';
  * @see https://angular.dev/guide/http/interceptors
  */
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  // Skip adding token for authentication endpoints
-  if (req.url.includes('/authentication/')) {
+  // Skip adding token for authentication endpoints and external services
+  if (req.url.includes('/authentication/') || req.url.includes('cloudinary.com')) {
     return next(req);
   }
 
