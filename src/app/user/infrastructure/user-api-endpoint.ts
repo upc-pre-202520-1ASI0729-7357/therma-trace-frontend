@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { BaseApiEndpoint } from '../../shared/infrastructure/base-api-endpoint';
@@ -10,6 +10,8 @@ import {
   TimezoneResponse,
   PlanResponse,
   PaymentMethodResponse,
+  CreatePaymentMethodRequest,
+  UpdatePaymentMethodRequest,
   LanguageResponse
 } from './user-response.interface';
 import {
@@ -49,7 +51,14 @@ export class UserApiEndpoint extends BaseApiEndpoint<User, UserResponse, UserAss
    * @param partialUser - Partial user data to update
    */
   updateProfile(partialUser: Partial<User>): Observable<User> {
-    return this.http.patch<UserResponse>(`${this.apiUrl}${this.basePath}`, partialUser)
+    // Map planId to currentPlan for backend compatibility
+    const payload: any = { ...partialUser };
+    if (payload.planId) {
+      payload.currentPlan = payload.planId;
+      delete payload.planId;
+    }
+
+    return this.http.patch<UserResponse>(`${this.apiUrl}${this.basePath}`, payload)
       .pipe(
         map(response => this.assembler.toEntity(response)),
         catchError(this.handleError('updateProfile'))
@@ -83,6 +92,12 @@ export class PlanApiEndpoint extends BaseStringApiEndpoint<Plan, PlanResponse, P
 
 /**
  * Payment Method API endpoint
+ *
+ * IMPORTANT: Backend API behavior differs from standard CRUD:
+ * - GET /paymentMethods returns a single payment method (not an array)
+ * - POST requires full card details (cardNumber, cvv)
+ * - PUT updates without requiring ID in URL (user can only have one payment method)
+ * - DELETE removes the user's payment method (no ID needed)
  */
 @Injectable({
   providedIn: 'root'
@@ -91,6 +106,61 @@ export class PaymentMethodApiEndpoint extends BaseApiEndpoint<PaymentMethod, Pay
   protected basePath = '/paymentMethods';
   protected apiUrl = environment.apiUrl;
   protected assembler = inject(PaymentMethodAssembler);
+
+  /**
+   * Get user's payment method
+   * Backend returns single object, not array
+   */
+  getUserPaymentMethod(): Observable<PaymentMethod | null> {
+    return this.http.get<PaymentMethodResponse>(`${this.apiUrl}${this.basePath}`)
+      .pipe(
+        retry(2),
+        map(response => this.assembler.toEntity(response)),
+        catchError(error => {
+          // 404 means no payment method exists
+          if (error.status === 404) {
+            return of(null);
+          }
+          return this.handleError('getUserPaymentMethod')(error);
+        })
+      );
+  }
+
+  /**
+   * Create payment method with full card details
+   * @param request - Create payment method request with full card number and CVV
+   */
+  createPaymentMethod(request: CreatePaymentMethodRequest): Observable<PaymentMethod> {
+    return this.http.post<PaymentMethodResponse>(`${this.apiUrl}${this.basePath}`, request)
+      .pipe(
+        map(response => this.assembler.toEntity(response)),
+        catchError(this.handleError('createPaymentMethod'))
+      );
+  }
+
+  /**
+   * Update payment method with full card details
+   * Backend doesn't require ID in URL (user can only have one payment method)
+   * @param request - Update payment method request with full card number and CVV
+   */
+  updatePaymentMethod(request: UpdatePaymentMethodRequest): Observable<PaymentMethod> {
+    return this.http.put<PaymentMethodResponse>(`${this.apiUrl}${this.basePath}`, request)
+      .pipe(
+        map(response => this.assembler.toEntity(response)),
+        catchError(this.handleError('updatePaymentMethod'))
+      );
+  }
+
+  /**
+   * Delete user's payment method
+   * Backend doesn't require ID in URL (user can only have one payment method)
+   */
+  deletePaymentMethod(): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}${this.basePath}`)
+      .pipe(
+        catchError(this.handleError('deletePaymentMethod'))
+      );
+  }
 }
 
 /**

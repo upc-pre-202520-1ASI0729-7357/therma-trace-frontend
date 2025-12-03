@@ -9,6 +9,7 @@ import {
   PaymentMethodApiEndpoint,
   LanguageApiEndpoint
 } from './user-api-endpoint';
+import { CreatePaymentMethodRequest, UpdatePaymentMethodRequest } from './user-response.interface';
 
 /**
  * User API - Aggregate repository for user-related operations
@@ -52,24 +53,35 @@ export class UserApi extends BaseApi {
   }
 
   // Payment Method operations
-  getPaymentMethods(): Observable<PaymentMethod[]> {
-    return this.paymentMethodEndpoint.getAll();
+  /**
+   * Get user's payment method
+   * Returns null if no payment method exists
+   */
+  getPaymentMethod(): Observable<PaymentMethod | null> {
+    return this.paymentMethodEndpoint.getUserPaymentMethod();
   }
 
-  getPaymentMethodById(id: number): Observable<PaymentMethod> {
-    return this.paymentMethodEndpoint.getById(id);
+  /**
+   * Create payment method with full card details
+   * @param request - Must include cardNumber and cvv for backend validation
+   */
+  createPaymentMethod(request: CreatePaymentMethodRequest): Observable<PaymentMethod> {
+    return this.paymentMethodEndpoint.createPaymentMethod(request);
   }
 
-  createPaymentMethod(paymentMethod: PaymentMethod): Observable<PaymentMethod> {
-    return this.paymentMethodEndpoint.create(paymentMethod);
+  /**
+   * Update payment method with full card details
+   * @param request - Must include cardNumber and cvv for backend validation
+   */
+  updatePaymentMethod(request: UpdatePaymentMethodRequest): Observable<PaymentMethod> {
+    return this.paymentMethodEndpoint.updatePaymentMethod(request);
   }
 
-  updatePaymentMethod(paymentMethod: PaymentMethod, id: number): Observable<PaymentMethod> {
-    return this.paymentMethodEndpoint.update(paymentMethod, id);
-  }
-
-  deletePaymentMethod(id: number): Observable<void> {
-    return this.paymentMethodEndpoint.delete(id);
+  /**
+   * Delete user's payment method
+   */
+  deletePaymentMethod(): Observable<void> {
+    return this.paymentMethodEndpoint.deletePaymentMethod();
   }
 
   // Language operations

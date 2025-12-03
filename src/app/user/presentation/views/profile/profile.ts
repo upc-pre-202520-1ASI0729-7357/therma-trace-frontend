@@ -186,7 +186,7 @@ export class Profile implements OnInit {
 
     dialogRef.afterClosed().subscribe(confirmed => {
       if (confirmed) {
-        this.formData.planId = 'freemium';
+        this.formData.planId = 'FREEMIUM';
         this.saveProfile();
       }
     });
@@ -196,16 +196,16 @@ export class Profile implements OnInit {
    * Upgrade to next plan tier
    */
   protected upgradePlan(): void {
-    const currentPlanId = this.formData.planId;
+    const currentPlanId = this.formData.planId.toLowerCase();
     let nextPlanId: string;
     let planName: string;
 
-    // Determine next plan
+    // Determine next plan (backend uses UPPERCASE IDs)
     if (currentPlanId === 'freemium') {
-      nextPlanId = 'premium';
+      nextPlanId = 'PREMIUM';
       planName = 'Premium';
     } else if (currentPlanId === 'premium') {
-      nextPlanId = 'enterprise';
+      nextPlanId = 'ENTERPRISE';
       planName = 'Enterprise';
     } else {
       return; // Already at highest tier
@@ -233,7 +233,7 @@ export class Profile implements OnInit {
     }
 
 
-    const plan = this.store.plans().find(p => p.id === nextPlanId);
+    const plan = this.store.plans().find(p => p.id.toLowerCase() === nextPlanId.toLowerCase());
     const dialogRef = this.dialog.open(ConfirmationModal, {
       width: '400px',
       data: {

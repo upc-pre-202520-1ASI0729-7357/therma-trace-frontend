@@ -83,9 +83,11 @@ export class UserStore {
           this._plans.set(plans);
           this._languages.set(languages);
 
-          // Load payment method if exists
+          // Load payment method if exists, otherwise set to null
           if (user.paymentMethodId) {
             this.loadPaymentMethod(user.paymentMethodId);
+          } else {
+            this._paymentMethod.set(null);
           }
         }),
         catchError(error => {
@@ -110,9 +112,11 @@ export class UserStore {
       .pipe(
         tap(user => {
           this._user.set(user);
-          // Load payment method if exists
+          // Load payment method if exists, otherwise set to null
           if (user.paymentMethodId) {
             this.loadPaymentMethod(user.paymentMethodId);
+          } else {
+            this._paymentMethod.set(null);
           }
         }),
         catchError(error => {
@@ -127,14 +131,16 @@ export class UserStore {
   }
 
   /**
-   * Load payment method by ID
+   * Load payment method
+   * Note: User can only have ONE payment method, so no ID needed
    */
   private loadPaymentMethod(id: number): void {
-    this.userApi.getPaymentMethodById(id)
+    this.userApi.getPaymentMethod()
       .pipe(
         tap(paymentMethod => this._paymentMethod.set(paymentMethod)),
         catchError(error => {
           console.error('Error loading payment method:', error);
+          this._paymentMethod.set(null);
           return of(null);
         })
       )
