@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { PaymentMethod } from '../../../../user/domain/user.entity';
 import { UserApi } from '../../../../user/infrastructure/user-api';
+import { CreatePaymentMethodRequest, UpdatePaymentMethodRequest } from '../../../../user/infrastructure/user-response.interface';
 import { ConfirmationModal } from './confirmation-modal';
 
 export interface PaymentModalData {
@@ -59,14 +60,14 @@ export class PaymentModal {
 
   protected get displayCardNumber(): string {
     if (this.data.paymentMethod) {
-      return `**** **** **** ${this.data.paymentMethod.lastFourDigits}`;
+      return this.data.paymentMethod.maskedCardNumber;
     }
     return '';
   }
 
   protected get displayExpiry(): string {
     if (this.data.paymentMethod) {
-      return `${this.data.paymentMethod.expiryMonth}/${this.data.paymentMethod.expiryYear}`;
+      return this.data.paymentMethod.expiry;
     }
     return '';
   }
@@ -93,36 +94,29 @@ export class PaymentModal {
   protected savePayment(): void {
     if (this.paymentForm.valid) {
       const formValue = this.paymentForm.value;
-      const cardNumber = formValue.cardNumber;
-      const lastFourDigits = cardNumber.slice(-4);
 
-      const paymentData = {
+      // Build request with full card details for backend validation
+      const request = {
         cardholderName: formValue.cardholderName,
-        lastFourDigits: lastFourDigits,
+        cardNumber: formValue.cardNumber,
         expiryMonth: formValue.expiryMonth,
         expiryYear: formValue.expiryYear,
-        cardType: this.detectCardType(cardNumber)
+        cvv: formValue.cvv
       };
 
       if (this.data.paymentMethod) {
-        // Update existing
-        const updatedPaymentMethod: PaymentMethod = {
-          ...this.data.paymentMethod,
-          ...paymentData
-        };
-        this.userApi.updatePaymentMethod(updatedPaymentMethod, this.data.paymentMethod.id).subscribe({
+        // Update existing payment method
+        const updateRequest: UpdatePaymentMethodRequest = request;
+        this.userApi.updatePaymentMethod(updateRequest).subscribe({
           next: (updated: PaymentMethod) => {
             this.dialogRef.close({ action: 'updated', paymentMethod: updated });
           },
           error: (err: Error) => console.error('Error updating payment method:', err)
         });
       } else {
-        // Create new - Note: ID will be assigned by backend
-        const newPaymentMethod: PaymentMethod = {
-          id: 0, // Temporary ID, backend will assign real one
-          ...paymentData
-        };
-        this.userApi.createPaymentMethod(newPaymentMethod).subscribe({
+        // Create new payment method
+        const createRequest: CreatePaymentMethodRequest = request;
+        this.userApi.createPaymentMethod(createRequest).subscribe({
           next: (created: PaymentMethod) => {
             this.dialogRef.close({ action: 'created', paymentMethod: created });
           },
@@ -146,8 +140,8 @@ export class PaymentModal {
       });
 
       confirmDialogRef.afterClosed().subscribe((confirmed: boolean) => {
-        if (confirmed && this.data.paymentMethod) {
-          this.userApi.deletePaymentMethod(this.data.paymentMethod.id).subscribe({
+        if (confirmed) {
+          this.userApi.deletePaymentMethod().subscribe({
             next: () => {
               this.dialogRef.close({ action: 'deleted' });
             },
@@ -162,16 +156,4 @@ export class PaymentModal {
     this.dialogRef.close();
   }
 
-  private detectCardType(cardNumber: string): string {
-    // Card type detection based on first digits
-    if (cardNumber.startsWith('4')) return 'Visa';
-    if (cardNumber.startsWith('51') || cardNumber.startsWith('52') ||
-      cardNumber.startsWith('53') || cardNumber.startsWith('54') ||
-      cardNumber.startsWith('55')) return 'Mastercard';
-    if (cardNumber.startsWith('34') || cardNumber.startsWith('37')) return 'American Express';
-    if (cardNumber.startsWith('6011') || cardNumber.startsWith('65')) return 'Discover';
-    if (cardNumber.startsWith('35')) return 'JCB';
-    if (cardNumber.startsWith('2') || cardNumber.startsWith('6')) return 'Mastercard';
-    return 'Credit Card';
-  }
 }

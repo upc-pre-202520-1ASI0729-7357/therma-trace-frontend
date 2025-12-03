@@ -64,7 +64,7 @@ export class MedicamentControl implements OnInit {
   }
 
   async onSubmit(formData: MedicamentFormData) {
-    if (!formData.name || !formData.temperature || !formData.expirationDate) {
+    if (!formData.name || !formData.expirationDate) {
       this.snackBar.open(
         this.translate.instant('common.error') + ': ' + this.translate.instant('medicaments.fillAllFields'),
         this.translate.instant('common.close'),
@@ -83,9 +83,8 @@ export class MedicamentControl implements OnInit {
         const updateRequest: UpdateMedicamentRequest = {
           id: this.editingMedicament.id,
           name: formData.name,
-          temperature: formData.temperature,
           expirationDate: formatDate(formData.expirationDate),
-          image: formData.image || 'https://via.placeholder.com/300x200?text=Medicine'
+          imageUrl: formData.imageUrl || 'https://via.placeholder.com/300x200?text=Medicine'
         };
         await this.medicamentStore.updateMedicament(updateRequest);
         this.snackBar.open(
@@ -96,9 +95,8 @@ export class MedicamentControl implements OnInit {
       } else {
         const createRequest: CreateMedicamentRequest = {
           name: formData.name,
-          temperature: formData.temperature,
           expirationDate: formatDate(formData.expirationDate),
-          image: formData.image || 'https://via.placeholder.com/300x200?text=Medicine'
+          imageUrl: formData.imageUrl || 'https://via.placeholder.com/300x200?text=Medicine'
         };
         await this.medicamentStore.createMedicament(createRequest);
         this.snackBar.open(

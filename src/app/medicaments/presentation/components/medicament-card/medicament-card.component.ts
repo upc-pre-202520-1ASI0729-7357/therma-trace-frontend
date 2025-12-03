@@ -25,7 +25,7 @@ import { Medicament } from '../../../domain/model/medicament.entity';
       <div class="card-image-container">
         <img
           mat-card-image
-          [src]="medicament.image"
+          [src]="getImageSrc(medicament)"
           [alt]="medicament.name"
           (error)="onImageError($event)"
           class="medicament-image"
@@ -58,8 +58,7 @@ import { Medicament } from '../../../domain/model/medicament.entity';
         <div class="medicament-info">
           <div class="info-item">
             <mat-icon color="primary">thermostat</mat-icon>
-            <span class="info-label">{{ 'medicaments.temperature' | translate }}:</span>
-            <span class="info-value">{{ medicament.temperature }}</span>
+            <!-- Temperature removed from model; keep expiration date below -->
           </div>
           <div class="info-item">
             <mat-icon color="primary">event</mat-icon>
@@ -91,5 +90,11 @@ export class MedicamentCardComponent {
     if (target) {
       target.src = 'https://via.placeholder.com/300x200?text=Medicine';
     }
+  }
+
+  getImageSrc(medicament: Medicament): string {
+    // Use a cast to any to remain compatible if backend returns `image` instead of `imageUrl`
+    const anyMed = medicament as any;
+    return anyMed.imageUrl || anyMed.image || 'https://via.placeholder.com/300x200?text=Medicine';
   }
 }

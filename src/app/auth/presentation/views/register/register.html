@@ -1,0 +1,184 @@
+<div class="auth-container">
+  <div class="auth-image">
+    <div class="image-overlay">
+      <h3 class="overlay-title">{{ 'auth.register.joinUs' | translate }}</h3>
+      <p class="overlay-text">{{ 'auth.register.joinMessage' | translate }}</p>
+    </div>
+  </div>
+
+  <div class="auth-card">
+    <div class="language-switcher-container">
+      <app-language-switcher></app-language-switcher>
+    </div>
+
+    <div class="auth-header">
+      <div class="logo-section">
+        <mat-icon class="logo-icon">thermostat</mat-icon>
+        <h1 class="app-title">ThermaTrace</h1>
+      </div>
+      <h2 class="auth-title">{{ 'auth.register.title' | translate }}</h2>
+      <p class="auth-subtitle">{{ 'auth.register.subtitle' | translate }}</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>{{ 'auth.firstName' | translate }}</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="firstName"
+            placeholder="Juan"
+          />
+          <mat-icon matPrefix>person</mat-icon>
+          @if (registerForm.get('firstName')?.hasError('required') && registerForm.get('firstName')?.touched) {
+            <mat-error>{{ 'auth.errors.firstNameRequired' | translate }}</mat-error>
+          }
+          @if (registerForm.get('firstName')?.hasError('minlength') && registerForm.get('firstName')?.touched) {
+            <mat-error>{{ 'auth.errors.firstNameMinLength' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>{{ 'auth.lastName' | translate }}</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="lastName"
+            placeholder="Pérez"
+          />
+          <mat-icon matPrefix>person_outline</mat-icon>
+          @if (registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched) {
+            <mat-error>{{ 'auth.errors.lastNameRequired' | translate }}</mat-error>
+          }
+          @if (registerForm.get('lastName')?.hasError('minlength') && registerForm.get('lastName')?.touched) {
+            <mat-error>{{ 'auth.errors.lastNameMinLength' | translate }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'auth.email' | translate }}</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          placeholder="ejemplo@correo.com"
+        />
+        <mat-icon matPrefix>email</mat-icon>
+        @if (registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched) {
+          <mat-error>{{ 'auth.errors.emailRequired' | translate }}</mat-error>
+        }
+        @if (registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched) {
+          <mat-error>{{ 'auth.errors.emailInvalid' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'auth.password' | translate }}</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="password"
+          placeholder="••••••••"
+        />
+        <mat-icon matPrefix>lock</mat-icon>
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="togglePasswordVisibility()"
+          [attr.aria-label]="'Hide password'"
+        >
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched) {
+          <mat-error>{{ 'auth.errors.passwordRequired' | translate }}</mat-error>
+        }
+        @if (registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched) {
+          <mat-error>{{ 'auth.errors.passwordMinLength' | translate }}</mat-error>
+        }
+        @if (registerForm.get('password')?.hasError('passwordStrength') && registerForm.get('password')?.touched) {
+          <mat-error>{{ 'auth.errors.passwordStrength' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'auth.confirmPassword' | translate }}</mat-label>
+        <input
+          matInput
+          [type]="hideConfirmPassword ? 'password' : 'text'"
+          formControlName="confirmPassword"
+          placeholder="••••••••"
+        />
+        <mat-icon matPrefix>lock_outline</mat-icon>
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="toggleConfirmPasswordVisibility()"
+          [attr.aria-label]="'Hide password'"
+        >
+          <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched) {
+          <mat-error>{{ 'auth.errors.confirmPasswordRequired' | translate }}</mat-error>
+        }
+        @if (registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched) {
+          <mat-error>{{ 'auth.errors.passwordMismatch' | translate }}</mat-error>
+        }
+      </mat-form-field>
+
+      <div class="terms-section">
+        <mat-checkbox formControlName="termsAccepted" color="primary">
+          <span class="terms-text">
+            {{ 'auth.register.agreeToTerms' | translate }}
+            <a href="/terms" target="_blank" class="link-text">{{ 'auth.register.terms' | translate }}</a>
+            {{ 'auth.and' | translate }}
+            <a href="/privacy" target="_blank" class="link-text">{{ 'auth.register.privacy' | translate }}</a>
+          </span>
+        </mat-checkbox>
+        @if (registerForm.get('termsAccepted')?.hasError('required') && registerForm.get('termsAccepted')?.touched) {
+          <div class="error-text">{{ 'auth.errors.termsRequired' | translate }}</div>
+        }
+      </div>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="submit-btn"
+        [disabled]="isLoading"
+      >
+        @if (isLoading) {
+          <span class="loading-content">
+            <mat-spinner diameter="20"></mat-spinner>
+            {{ 'auth.register.creatingAccount' | translate }}
+          </span>
+        } @else {
+          {{ 'auth.register.createAccount' | translate }}
+        }
+      </button>
+
+      <div class="divider">
+        <span class="divider-text">{{ 'auth.or' | translate }}</span>
+      </div>
+
+      <div class="social-login">
+        <button mat-stroked-button type="button" class="social-btn google-btn">
+          <mat-icon>mail</mat-icon>
+          {{ 'auth.register.continueWithGoogle' | translate }}
+        </button>
+      </div>
+
+      <div class="auth-footer">
+        <p>
+          {{ 'auth.register.hasAccount' | translate }}
+          <a routerLink="/login" class="link-text-bold">
+            {{ 'auth.register.signIn' | translate }}
+          </a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>

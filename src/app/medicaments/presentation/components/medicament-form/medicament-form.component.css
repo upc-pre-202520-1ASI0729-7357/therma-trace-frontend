@@ -141,6 +141,33 @@
   background-color: rgba(80, 172, 249, 0.1);
 }
 
+.mat-mdc-form-field .mat-mdc-icon-button[matsuffix]:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Upload Status */
+.upload-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background-color: #E3F2FD;
+  border-radius: 8px;
+  color: #1976D2;
+  font-size: 0.875rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
 /* Form Actions */
 .form-actions {
   display: flex;

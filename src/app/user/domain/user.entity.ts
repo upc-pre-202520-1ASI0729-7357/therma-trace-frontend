@@ -36,11 +36,13 @@ export interface Plan extends BaseStringEntity {
  * Payment Method entity
  */
 export interface PaymentMethod extends BaseEntity {
-  cardType: string;
+  cardholderName: string;
   lastFourDigits: string;
+  maskedCardNumber: string;
+  cardType: string;
   expiryMonth: string;
   expiryYear: string;
-  cardholderName: string;
+  expiry: string;
 }
 
 /**
