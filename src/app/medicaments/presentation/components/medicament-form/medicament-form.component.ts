@@ -10,8 +10,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { TranslateModule } from '@ngx-translate/core';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Medicament } from '../../../domain/model/medicament.entity';
+import { CloudinaryService } from '../../../../shared/services/cloudinary.service';
 
 export interface MedicamentFormData {
   name: string;
@@ -34,6 +36,7 @@ export interface MedicamentFormData {
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
+    MatSnackBarModule,
     TranslateModule
   ],
   template: `
@@ -74,19 +77,27 @@ export interface MedicamentFormData {
                 <input matInput type="text" readonly [value]="selectedFileName"
                        [placeholder]="'medicaments.placeholders.selectImage' | translate">
                 <button mat-icon-button matSuffix type="button" (click)="fileInput.click()"
-                        [matTooltip]="'medicaments.selectImage' | translate">
+                        [matTooltip]="'medicaments.selectImage' | translate"
+                        [disabled]="uploadingImage">
                   <mat-icon>upload_file</mat-icon>
                 </button>
               </mat-form-field>
 
               <input #fileInput type="file" accept="image/*" (change)="onImageSelected($event)"
-                     style="display: none;">
+                     style="display: none;" [disabled]="uploadingImage">
+
+              <!-- Estado de subida -->
+              <div *ngIf="uploadingImage" class="upload-status">
+                <mat-spinner diameter="24"></mat-spinner>
+                <span>{{ 'medicaments.uploadingImage' | translate }}</span>
+              </div>
 
               <!-- Preview de la imagen -->
               <div *ngIf="imagePreview" class="image-preview-container">
                 <img [src]="imagePreview" alt="Preview" class="image-preview">
                 <button mat-icon-button type="button" (click)="removeImage()"
-                        class="remove-image-btn" [matTooltip]="'common.remove' | translate">
+                        class="remove-image-btn" [matTooltip]="'common.remove' | translate"
+                        [disabled]="uploadingImage">
                   <mat-icon>close</mat-icon>
                 </button>
               </div>
@@ -99,9 +110,9 @@ export interface MedicamentFormData {
             <mat-icon>cancel</mat-icon>
             {{ 'common.cancel' | translate }}
           </button>
-          <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="loading">
-            <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
-            <mat-icon *ngIf="!loading">{{ isEditing ? 'update' : 'save' }}</mat-icon>
+          <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="loading || uploadingImage">
+            <mat-spinner *ngIf="loading || uploadingImage" diameter="20"></mat-spinner>
+            <mat-icon *ngIf="!loading && !uploadingImage">{{ isEditing ? 'update' : 'save' }}</mat-icon>
             {{ isEditing ? ('common.update' | translate) : ('common.create' | translate) }}
           </button>
         </mat-card-actions>
@@ -126,6 +137,13 @@ export class MedicamentFormComponent implements OnInit {
 
   imagePreview: string | null = null;
   selectedFileName: string = '';
+  uploadingImage: boolean = false;
+
+  constructor(
+    private cloudinaryService: CloudinaryService,
+    private snackBar: MatSnackBar,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     if (this.isEditing && this.medicament) {
@@ -171,30 +189,48 @@ export class MedicamentFormComponent implements OnInit {
     if (element.files && element.files.length > 0) {
       const file = element.files[0];
 
-      // Validar tipo de archivo
-      if (!file.type.startsWith('image/')) {
-        this.imageValidationError.emit('medicaments.invalidFileType');
-        return;
-      }
-
-      // Validar tamaño de archivo (máximo 5MB)
-      const maxSize = 5 * 1024 * 1024; // 5MB
-      if (file.size > maxSize) {
-        this.imageValidationError.emit('medicaments.fileTooLarge');
+      // Validar archivo usando el servicio de Cloudinary
+      const validation = this.cloudinaryService.validateFile(file, 10);
+      if (!validation.valid) {
+        this.showError(validation.error || this.translate.instant('medicaments.invalidFile'));
+        this.imageValidationError.emit(validation.error);
+        element.value = ''; // Reset input
         return;
       }
 
       this.selectedFileName = file.name;
 
+      // Crear preview local inmediatamente
       const reader = new FileReader();
       reader.onload = (e) => {
         const result = e.target?.result as string;
         if (result) {
           this.imagePreview = result;
-          this.formData.imageUrl = result;
         }
       };
       reader.readAsDataURL(file);
+
+      // Subir a Cloudinary
+      this.uploadingImage = true;
+      this.cloudinaryService.uploadImage(file).subscribe({
+        next: (url) => {
+          this.uploadingImage = false;
+          this.formData.imageUrl = url; // Guardar la URL de Cloudinary
+          console.log('Cloudinary URL:', url);
+        },
+        error: (error) => {
+          this.uploadingImage = false;
+          this.showError(this.translate.instant('medicaments.imageUploadError'));
+          this.imageValidationError.emit('Error uploading to Cloudinary');
+          console.error('Cloudinary upload error:', error);
+          // Limpiar preview en caso de error
+          this.imagePreview = null;
+          this.selectedFileName = '';
+          this.formData.imageUrl = '';
+        }
+      });
+
+      element.value = ''; // Reset input
     }
   }
 
@@ -213,5 +249,14 @@ export class MedicamentFormComponent implements OnInit {
 
   onClose(): void {
     this.close.emit();
+  }
+
+  private showError(message: string): void {
+    this.snackBar.open(message, this.translate.instant('common.close'), {
+      duration: 5000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+      panelClass: ['error-snackbar']
+    });
   }
 }
